@@ -58,21 +58,25 @@ class PlayerEventListener implements Listener{
     }
 
     /**
+     * @priority        HIGHEST\
+     *
      * @param PlayerInteractEvent $event
      */
     public function onPlayerInteractEvent(PlayerInteractEvent $event) : void{
-        $block = $event->getBlock();
-        if ($block instanceof Bed) {
-            $player = $event->getPlayer();
-            $other = $block->getOtherHalf();
-            if ($other === null) {
-                $player->sendMessage(TextFormat::GRAY . "This bed is incomplete");
-            } elseif ($player->distanceSquared($block) > 4 and $player->distanceSquared($other) > 4) {
-                $player->sendMessage(new TranslationContainer(TextFormat::GRAY . "%tile.bed.tooFar"));
-            } elseif (($b = ($block->isHeadPart() ? $block : $other))->isOccupied()) {
-                $player->sendMessage(new TranslationContainer(TextFormat::GRAY . "%tile.bed.occupied"));
-            } else {
-                $player->sleepOn($b);
+        if (!$event->isCancelled()) {
+            $block = $event->getBlock();
+            if ($block instanceof Bed) {
+                $player = $event->getPlayer();
+                $other = $block->getOtherHalf();
+                if ($other === null) {
+                    $player->sendMessage(TextFormat::GRAY . "This bed is incomplete");
+                } elseif ($player->distanceSquared($block) > 4 and $player->distanceSquared($other) > 4) {
+                    $player->sendMessage(new TranslationContainer(TextFormat::GRAY . "%tile.bed.tooFar"));
+                } elseif (($b = ($block->isHeadPart() ? $block : $other))->isOccupied()) {
+                    $player->sendMessage(new TranslationContainer(TextFormat::GRAY . "%tile.bed.occupied"));
+                } else {
+                    $player->sleepOn($b);
+                }
             }
         }
     }
