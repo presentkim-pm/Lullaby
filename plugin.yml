@@ -1,0 +1,27 @@
+---
+name:             Lullaby
+main:             presentkim\lullaby\LullabyMain
+version:          1.0.0
+api:              [3.0.0, 3.0.0-ALPHA10]
+author:           PresentKim
+
+permissions:
+  lullaby.cmd:
+    description:  Lullaby main command
+    default:      op
+  lullaby.heal.cmd:
+    description:  Lullaby heal command
+    default:      op
+  lullaby.delay.cmd:
+    description:  Lullaby delay command
+    default:      op
+  lullaby.lang.cmd:
+    description:  Lullaby lang command
+    default:      op
+  lullaby.reload.cmd:
+    description:  Lullaby reload command
+    default:      op
+  lullaby.save.cmd:
+    description:  Lullaby save command
+    default:      op
+...
