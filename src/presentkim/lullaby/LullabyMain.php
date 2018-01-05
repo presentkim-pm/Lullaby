@@ -8,6 +8,9 @@ use pocketmine\command\{
 use pocketmine\entity\Attribute;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
+use pocketmine\scheduler\Task;
+use pocketmine\scheduler\TaskHandler;
+use pocketmine\Server;
 use presentkim\lullaby\{
   listener\PlayerEventListener, command\CommandListener, util\Translation
 };
@@ -19,6 +22,9 @@ class LullabyMain extends PluginBase{
 
     /** @var PluginCommand[] */
     private $commands = [];
+
+    /** @var TaskHandler */
+    private $taskHandler = null;
 
     /** @return self */
     public static function getInstance() : self{
@@ -40,10 +46,20 @@ class LullabyMain extends PluginBase{
 
         // register event listeners
         $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
+
+        $this->taskHandler = Server::getInstance()->getScheduler()->scheduleRepeatingTask(new class() extends Task{
+
+            public function onRun(int $currentTick){
+                foreach (Server::getInstance()->getLevels() as $key => $value) {
+                    $value->setSleepTicks(0);
+                }
+            }
+        }, 30);
     }
 
     public function onDisable() : void{
         $this->save();
+        $this->taskHandler->cancel();
     }
 
     public function load() : void{
