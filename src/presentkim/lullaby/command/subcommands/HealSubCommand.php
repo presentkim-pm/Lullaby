@@ -3,12 +3,10 @@
 namespace presentkim\lullaby\command\subcommands;
 
 use pocketmine\command\CommandSender;
-use pocketmine\Server;
 use presentkim\lullaby\{
   LullabyMain as Plugin, util\Translation, command\SubCommand
 };
 use function presentkim\lullaby\util\toInt;
-use function strtolower;
 
 class HealSubCommand extends SubCommand{
 
