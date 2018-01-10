@@ -5,8 +5,6 @@ namespace presentkim\lullaby;
 use pocketmine\command\{
   CommandExecutor, PluginCommand
 };
-use pocketmine\entity\Attribute;
-use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\Task;
 use pocketmine\scheduler\TaskHandler;
