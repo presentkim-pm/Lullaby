@@ -1,7 +1,7 @@
 ---
 prefix: "[Lullaby] "
 
-command-generic-failure@permission : "당신은 이 명령어를 사용할 권한이 없습니다."
+command-generic-failure@permission : "당신은 이 명령어를 사용할 권한이 없습니다"
 
 command-lullaby: "lullaby"
 command-lullaby@usage: "/lullaby <heal | delay | list | lang | reload | save>"
@@ -10,30 +10,30 @@ command-lullaby@aliases: ["ll"]
 
 command-lullaby-heal: "heal"
 command-lullaby-heal@usage: "/lullaby Heal <회복량>"
-command-lullaby-heal@success: "침대의 회복량을 {%0}로 설정했습니다."
-command-lullaby-heal@failure: "{%0}는 잘못된 값입니다, 1보다 작은 숫자로 설정 할 수 없습니다."
+command-lullaby-heal@success: "침대의 회복량을 {%0}로 설정했습니다"
+command-lullaby-heal@failure: "{%0}는 잘못된 값입니다, 1보다 작은 숫자로 설정 할 수 없습니다"
 command-lullaby-heal@aliases: ["h"]
 
 command-lullaby-delay: "delay"
 command-lullaby-delay@usage: "/lullaby Delay <틱>"
-command-lullaby-delay@success: "회복의 딜레이를 {%0}로 설정했습니다."
+command-lullaby-delay@success: "회복의 딜레이를 {%0}로 설정했습니다"
 command-lullaby-delay@success: "You have successfully set up a delay to {%0} tick"
-command-lullaby-delay@failure: "{%0}는 잘못된 값입니다, 0보다 작은 숫자로 설정 할 수 없습니다."
+command-lullaby-delay@failure: "{%0}는 잘못된 값입니다, 0보다 작은 숫자로 설정 할 수 없습니다"
 command-lullaby-delay@aliases: ["d"]
 
 command-lullaby-lang: "lang"
 command-lullaby-lang@usage: "/ItemPopup Lang <언어명>"
-command-lullaby-lang@success: "{%0}언어 파일을 성공적으로 불러왔습니다."
-command-lullaby-lang@failure: "{%0}는 알 수 없는 언어명입니다."
+command-lullaby-lang@success: "{%0}언어 파일을 성공적으로 불러왔습니다"
+command-lullaby-lang@failure: "{%0}는 알 수 없는 언어명입니다"
 command-lullaby-lang@aliases: ["language"]
 
 command-lullaby-reload: "reload"
 command-lullaby-reload@usage: "/lullaby Reload"
-command-lullaby-reload@success: "모든 데이터를 성공적으로 불러왔습니다."
+command-lullaby-reload@success: "모든 데이터를 성공적으로 불러왔습니다"
 command-lullaby-reload@aliases: ["rl"]
 
 command-lullaby-save: "save"
 command-lullaby-save@usage: "/lullaby Save"
-command-lullaby-save@success: "모든 데이터를 성공적으로 저장했습니다."
+command-lullaby-save@success: "모든 데이터를 성공적으로 저장했습니다"
 command-lullaby-save@aliases: ["sv"]
 ...
