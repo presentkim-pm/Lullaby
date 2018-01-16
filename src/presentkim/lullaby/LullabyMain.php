@@ -63,7 +63,6 @@ class LullabyMain extends PluginBase{
             mkdir($dataFolder, 0777, true);
         }
 
-        $this->saveDefaultConfig();
         $this->reloadConfig();
 
         $langfilename = $dataFolder . 'lang.yml';
