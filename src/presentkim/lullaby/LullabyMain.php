@@ -19,6 +19,9 @@ class LullabyMain extends PluginBase{
     /** @var self */
     private static $instance = null;
 
+    /** @var string */
+    public static $prefix = '';
+
     /** @var PoolCommand */
     private $command;
 
@@ -75,6 +78,7 @@ class LullabyMain extends PluginBase{
             Translation::load($langfilename);
         }
 
+        self::$prefix = Translation::translate('prefix');
         $this->reloadCommand();
     }
 
