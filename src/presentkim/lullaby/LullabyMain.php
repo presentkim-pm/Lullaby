@@ -102,9 +102,6 @@ class LullabyMain extends PluginBase{
 
         // save db
         $this->saveConfig();
-
-        // save lang
-        Translation::save("{$dataFolder}lang.yml");
     }
 
     /**
