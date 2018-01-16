@@ -9,19 +9,20 @@ permissions:
   lullaby.cmd:
     description:  Lullaby main command
     default:      op
-  lullaby.heal.cmd:
-    description:  Lullaby heal command
-    default:      op
-  lullaby.delay.cmd:
-    description:  Lullaby delay command
-    default:      op
-  lullaby.lang.cmd:
-    description:  Lullaby lang command
-    default:      op
-  lullaby.reload.cmd:
-    description:  Lullaby reload command
-    default:      op
-  lullaby.save.cmd:
-    description:  Lullaby save command
-    default:      op
+    children:
+      lullaby.cmd.heal:
+        description:  Lullaby command - heal
+        default:      op
+      lullaby.cmd.delay:
+        description:  Lullaby command - delay
+        default:      op
+      lullaby.cmd.lang:
+        description:  Lullaby command - lang
+        default:      op
+      lullaby.cmd.reload:
+        description:  Lullaby command - reload
+        default:      op
+      lullaby.cmd.save:
+        description:  Lullaby command - save
+        default:      op
 ...
