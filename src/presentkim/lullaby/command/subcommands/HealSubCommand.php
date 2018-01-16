@@ -4,19 +4,19 @@ namespace presentkim\lullaby\command\subcommands;
 
 use pocketmine\command\CommandSender;
 use presentkim\lullaby\{
-  LullabyMain as Plugin, util\Translation, command\SubCommand
+  command\PoolCommand, LullabyMain as Plugin, command\SubCommand
 };
 use function presentkim\lullaby\util\toInt;
 
 class HealSubCommand extends SubCommand{
 
-    public function __construct(Plugin $owner){
-        parent::__construct($owner, Translation::translate('prefix'), 'command-lullaby-heal', 'lullaby.set.cmd');
+    public function __construct(PoolCommand $owner){
+        parent::__construct($owner, 'heal');
     }
 
     /**
      * @param CommandSender $sender
-     * @param array         $args
+     * @param String[]      $args
      *
      * @return bool
      */
@@ -26,10 +26,10 @@ class HealSubCommand extends SubCommand{
                 return $i >= 1;
             });
             if ($heal === null) {
-                $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure'), $args[0]));
+                $sender->sendMessage(Plugin::$prefix . $this->translate('failure', $args[0]));
             } else {
                 $this->owner->getConfig()->set("heal", $heal);
-                $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('success'), $heal));
+                $sender->sendMessage(Plugin::$prefix . $this->translate('success', $heal));
             }
             return true;
         }

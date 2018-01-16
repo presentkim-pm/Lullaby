@@ -4,19 +4,19 @@ namespace presentkim\lullaby\command\subcommands;
 
 use pocketmine\command\CommandSender;
 use presentkim\lullaby\{
-  LullabyMain as Plugin, util\Translation, command\SubCommand
+  command\PoolCommand, LullabyMain as Plugin, command\SubCommand
 };
 use function presentkim\lullaby\util\toInt;
 
 class DelaySubCommand extends SubCommand{
 
-    public function __construct(Plugin $owner){
-        parent::__construct($owner, Translation::translate('prefix'), 'command-lullaby-delay', 'lullaby.default.cmd');
+    public function __construct(PoolCommand $owner){
+        parent::__construct($owner, 'delay');
     }
 
     /**
      * @param CommandSender $sender
-     * @param array         $args
+     * @param String[]      $args
      *
      * @return bool
      */
@@ -26,10 +26,10 @@ class DelaySubCommand extends SubCommand{
                 return $i >= 0;
             });
             if ($delay === null) {
-                $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('failure'), $args[0]));
+                $sender->sendMessage(Plugin::$prefix . $this->translate('failure', $args[0]));
             } else {
                 $this->owner->getConfig()->set("delay", $delay);
-                $sender->sendMessage($this->prefix . Translation::translate($this->getFullId('success'), $delay));
+                $sender->sendMessage(Plugin::$prefix . $this->translate('success', $delay));
             }
             return true;
         }
