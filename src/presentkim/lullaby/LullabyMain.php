@@ -31,21 +31,15 @@ class LullabyMain extends PluginBase{
 
     public function onLoad() : void{
         if (self::$instance === null) {
-            // register instance
             self::$instance = $this;
-
-            // load utils
             $this->getServer()->getLoader()->loadClass('presentkim\lullaby\util\Utils');
 
-            // load default lang
             Translation::loadFromResource($this->getResource('lang/eng.yml'), true);
         }
     }
 
     public function onEnable() : void{
         $this->load();
-
-        // register event listeners
         $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
 
         $this->taskHandler = Server::getInstance()->getScheduler()->scheduleRepeatingTask(new class() extends Task{
@@ -69,11 +63,9 @@ class LullabyMain extends PluginBase{
             mkdir($dataFolder, 0777, true);
         }
 
-        // load db
         $this->saveDefaultConfig();
         $this->reloadConfig();
 
-        // load lang
         $langfilename = $dataFolder . 'lang.yml';
         if (!file_exists($langfilename)) {
             $resource = $this->getResource('lang/eng.yml');
@@ -84,13 +76,10 @@ class LullabyMain extends PluginBase{
             Translation::load($langfilename);
         }
 
-        // unregister commands
         foreach ($this->commands as $command) {
             $this->getServer()->getCommandMap()->unregister($command);
         }
         $this->commands = [];
-
-        // register commands
         $this->registerCommand(new CommandListener($this), Translation::translate('command-lullaby'), 'Lullaby', 'lullaby.cmd', Translation::translate('command-lullaby@description'), Translation::translate('command-lullaby@usage'), Translation::getArray('command-lullaby@aliases'));
     }
 
@@ -100,7 +89,6 @@ class LullabyMain extends PluginBase{
             mkdir($dataFolder, 0777, true);
         }
 
-        // save db
         $this->saveConfig();
     }
 
