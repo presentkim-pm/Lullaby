@@ -28,7 +28,7 @@ class HealSubCommand extends SubCommand{
             if ($heal === null) {
                 $sender->sendMessage(Plugin::$prefix . $this->translate('failure', $args[0]));
             } else {
-                $this->owner->getConfig()->set("heal", $heal);
+                $this->plugin->getConfig()->set("heal", $heal);
                 $sender->sendMessage(Plugin::$prefix . $this->translate('success', $heal));
             }
             return true;

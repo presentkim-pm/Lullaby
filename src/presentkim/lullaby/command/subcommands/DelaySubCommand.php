@@ -28,7 +28,7 @@ class DelaySubCommand extends SubCommand{
             if ($delay === null) {
                 $sender->sendMessage(Plugin::$prefix . $this->translate('failure', $args[0]));
             } else {
-                $this->owner->getConfig()->set("delay", $delay);
+                $this->plugin->getConfig()->set("delay", $delay);
                 $sender->sendMessage(Plugin::$prefix . $this->translate('success', $delay));
             }
             return true;
