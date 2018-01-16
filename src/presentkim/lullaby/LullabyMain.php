@@ -36,6 +36,9 @@ class LullabyMain extends PluginBase{
 
             // load utils
             $this->getServer()->getLoader()->loadClass('presentkim\lullaby\util\Utils');
+
+            // load default lang
+            Translation::loadFromResource($this->getResource('lang/eng.yml'), true);
         }
     }
 
