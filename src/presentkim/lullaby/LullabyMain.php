@@ -2,15 +2,16 @@
 
 namespace presentkim\lullaby;
 
-use pocketmine\command\{
-  CommandExecutor, PluginCommand
-};
-use pocketmine\plugin\PluginBase;
-use pocketmine\scheduler\Task;
-use pocketmine\scheduler\TaskHandler;
 use pocketmine\Server;
-use presentkim\lullaby\{
-  listener\PlayerEventListener, command\CommandListener, util\Translation
+use pocketmine\plugin\PluginBase;
+use pocketmine\scheduler\{
+  Task, TaskHandler
+};
+use presentkim\lullaby\util\Translation;
+use presentkim\lullaby\listener\PlayerEventListener;
+use presentkim\lullaby\command\PoolCommand;
+use presentkim\lullaby\command\subcommands\{
+  DelaySubCommand, HealSubCommand, LangSubCommand, ReloadSubCommand, SaveSubCommand
 };
 
 class LullabyMain extends PluginBase{
@@ -18,8 +19,8 @@ class LullabyMain extends PluginBase{
     /** @var self */
     private static $instance = null;
 
-    /** @var PluginCommand[] */
-    private $commands = [];
+    /** @var PoolCommand */
+    private $command;
 
     /** @var TaskHandler */
     private $taskHandler = null;
@@ -74,11 +75,7 @@ class LullabyMain extends PluginBase{
             Translation::load($langfilename);
         }
 
-        foreach ($this->commands as $command) {
-            $this->getServer()->getCommandMap()->unregister($command);
-        }
-        $this->commands = [];
-        $this->registerCommand(new CommandListener($this), Translation::translate('command-lullaby'), 'Lullaby', 'lullaby.cmd', Translation::translate('command-lullaby@description'), Translation::translate('command-lullaby@usage'), Translation::getArray('command-lullaby@aliases'));
+        $this->reloadCommand();
     }
 
     public function save() : void{
@@ -90,26 +87,20 @@ class LullabyMain extends PluginBase{
         $this->saveConfig();
     }
 
-    /**
-     * @param CommandExecutor $executor
-     * @param                 $name
-     * @param                 $fallback
-     * @param                 $permission
-     * @param string          $description
-     * @param null            $usageMessage
-     * @param array|null      $aliases
-     */
-    private function registerCommand(CommandExecutor $executor, $name, $fallback, $permission, $description = "", $usageMessage = null, array $aliases = null) : void{
-        $command = new PluginCommand($name, $this);
-        $command->setExecutor($executor);
-        $command->setPermission($permission);
-        $command->setDescription($description);
-        $command->setUsage($usageMessage ?? ('/' . $name));
-        if (is_array($aliases)) {
-            $command->setAliases($aliases);
+    public function reloadCommand(){
+        if ($this->command == null) {
+            $this->command = new PoolCommand($this, 'lullaby');
+            $this->command->createSubCommand(DelaySubCommand::class);
+            $this->command->createSubCommand(HealSubCommand::class);
+            $this->command->createSubCommand(LangSubCommand::class);
+            $this->command->createSubCommand(ReloadSubCommand::class);
+            $this->command->createSubCommand(SaveSubCommand::class);
         }
-
-        $this->getServer()->getCommandMap()->register($fallback, $command);
-        $this->commands[] = $command;
+        $this->command->updateTranslation();
+        $this->command->updateSudCommandTranslation();
+        if ($this->command->isRegistered()) {
+            $this->getServer()->getCommandMap()->unregister($this->command);
+        }
+        $this->getServer()->getCommandMap()->register(strtolower($this->getName()), $this->command);
     }
 }
