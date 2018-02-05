@@ -4,7 +4,8 @@ prefix: "[Lullaby] "
 command-generic-failure@permission : "당신은 이 명령어를 사용할 권한이 없습니다"
 
 command-lullaby: "lullaby"
-command-lullaby@usage: "/lullaby <heal | delay | lang | reload | save>"
+command-lullaby@usage: "/lullaby <{%0}>"
+command-lullaby@usage-separator: " | "
 command-lullaby@description: "Lullaby 메인 명령어"
 command-lullaby@aliases: ["ll"]
 
