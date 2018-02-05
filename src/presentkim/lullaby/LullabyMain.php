@@ -91,7 +91,7 @@ class LullabyMain extends PluginBase{
         $this->saveConfig();
     }
 
-    public function reloadCommand(){
+    public function reloadCommand() : void{
         if ($this->command == null) {
             $this->command = new PoolCommand($this, 'lullaby');
             $this->command->createSubCommand(DelaySubCommand::class);
