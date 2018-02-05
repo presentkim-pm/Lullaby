@@ -3,9 +3,11 @@
 namespace presentkim\lullaby\command\subcommands;
 
 use pocketmine\command\CommandSender;
-use presentkim\lullaby\{
-  command\PoolCommand, LullabyMain as Plugin, util\Translation, command\SubCommand
+use presentkim\lullaby\LullabyMain as Plugin;
+use presentkim\lullaby\command\{
+  PoolCommand, SubCommand
 };
+use presentkim\lullaby\util\Translation;
 
 class LangSubCommand extends SubCommand{
 

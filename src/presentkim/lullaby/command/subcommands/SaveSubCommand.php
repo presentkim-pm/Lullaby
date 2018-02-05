@@ -3,8 +3,9 @@
 namespace presentkim\lullaby\command\subcommands;
 
 use pocketmine\command\CommandSender;
-use presentkim\lullaby\{
-  command\PoolCommand, LullabyMain as Plugin, command\SubCommand
+use presentkim\lullaby\LullabyMain as Plugin;
+use presentkim\lullaby\command\{
+  PoolCommand, SubCommand
 };
 
 class SaveSubCommand extends SubCommand{
