@@ -4,9 +4,8 @@ namespace presentkim\lullaby\command\subcommands;
 
 use pocketmine\command\CommandSender;
 use presentkim\lullaby\{
-  command\PoolCommand, LullabyMain as Plugin, command\SubCommand
+  command\PoolCommand, LullabyMain as Plugin, command\SubCommand, util\Utils
 };
-use function presentkim\lullaby\util\toInt;
 
 class HealSubCommand extends SubCommand{
 
@@ -22,7 +21,7 @@ class HealSubCommand extends SubCommand{
      */
     public function onCommand(CommandSender $sender, array $args) : bool{
         if (isset($args[0])) {
-            $heal = toInt($args[0], null, function (int $i){
+            $heal = Utils::toInt($args[0], null, function (int $i){
                 return $i >= 1;
             });
             if ($heal === null) {

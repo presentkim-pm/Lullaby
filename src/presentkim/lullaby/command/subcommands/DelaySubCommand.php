@@ -4,9 +4,8 @@ namespace presentkim\lullaby\command\subcommands;
 
 use pocketmine\command\CommandSender;
 use presentkim\lullaby\{
-  command\PoolCommand, LullabyMain as Plugin, command\SubCommand
+  command\PoolCommand, LullabyMain as Plugin, command\SubCommand, util\Utils
 };
-use function presentkim\lullaby\util\toInt;
 
 class DelaySubCommand extends SubCommand{
 
@@ -22,7 +21,7 @@ class DelaySubCommand extends SubCommand{
      */
     public function onCommand(CommandSender $sender, array $args) : bool{
         if (isset($args[0])) {
-            $delay = toInt($args[0], null, function (int $i){
+            $delay = Utils::toInt($args[0], null, function (int $i){
                 return $i >= 0;
             });
             if ($delay === null) {

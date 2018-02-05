@@ -36,7 +36,6 @@ class LullabyMain extends PluginBase{
     public function onLoad() : void{
         if (self::$instance === null) {
             self::$instance = $this;
-            $this->getServer()->getLoader()->loadClass('presentkim\lullaby\util\Utils');
             Translation::loadFromResource($this->getResource('lang/eng.yml'), true);
         }
     }
