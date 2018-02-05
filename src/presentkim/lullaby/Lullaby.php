@@ -2,17 +2,15 @@
 
 namespace presentkim\lullaby;
 
-use pocketmine\Server;
 use pocketmine\plugin\PluginBase;
-use pocketmine\scheduler\{
-  Task, TaskHandler
-};
+use pocketmine\scheduler\TaskHandler;
 use presentkim\lullaby\command\PoolCommand;
 use presentkim\lullaby\command\subcommands\{
   DelaySubCommand, HealSubCommand, LangSubCommand, ReloadSubCommand, SaveSubCommand
 };
-use presentkim\lullaby\util\Translation;
 use presentkim\lullaby\listener\PlayerEventListener;
+use presentkim\lullaby\task\SetSleepTickTask;
+use presentkim\lullaby\util\Translation;
 
 class Lullaby extends PluginBase{
 
@@ -44,14 +42,7 @@ class Lullaby extends PluginBase{
         $this->load();
         $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
 
-        $this->taskHandler = Server::getInstance()->getScheduler()->scheduleRepeatingTask(new class() extends Task{
-
-            public function onRun(int $currentTick){
-                foreach (Server::getInstance()->getLevels() as $key => $value) {
-                    $value->setSleepTicks(0);
-                }
-            }
-        }, 30);
+        $this->taskHandler = $this->getServer()->getScheduler()->scheduleRepeatingTask(new SetSleepTickTask(), 30);
     }
 
     public function onDisable() : void{

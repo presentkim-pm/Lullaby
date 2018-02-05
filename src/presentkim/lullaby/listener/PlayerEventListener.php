@@ -2,21 +2,18 @@
 
 namespace presentkim\lullaby\listener;
 
-use pocketmine\Player;
 use pocketmine\Server;
 use pocketmine\block\Bed;
 use pocketmine\event\{
   Listener, TranslationContainer
 };
-use pocketmine\event\entity\EntityRegainHealthEvent;
 use pocketmine\event\player\{
   PlayerBedEnterEvent, PlayerBedLeaveEvent, PlayerInteractEvent
 };
-use pocketmine\scheduler\{
-  Task, TaskHandler
-};
 use pocketmine\utils\TextFormat;
+use pocketmine\scheduler\TaskHandler;
 use presentkim\lullaby\Lullaby as Plugin;
+use presentkim\lullaby\task\HealTask;
 
 class PlayerEventListener implements Listener{
 
@@ -33,23 +30,7 @@ class PlayerEventListener implements Listener{
     /** @param PlayerBedEnterEvent $event */
     public function onPlayerBedEnterEven(PlayerBedEnterEvent $event) : void{
         $player = $event->getPlayer();
-        $this->taskHandlers[$player->getName()] = Server::getInstance()->getScheduler()->scheduleDelayedRepeatingTask(new class($player, $this->owner) extends Task{
-
-            /** @var Player */
-            public $player;
-
-            /** @var Plugin */
-            private $owner;
-
-            public function __construct(Player $player, Plugin $owner){
-                $this->player = $player;
-                $this->owner = $owner;
-            }
-
-            public function onRun(int $currentTick){
-                $this->player->heal(new EntityRegainHealthEvent($this->player, ((int) $this->owner->getConfig()->get("heal")), EntityRegainHealthEvent::CAUSE_MAGIC));
-            }
-        }, $delay = ((int) $this->owner->getConfig()->get("delay")), $delay);
+        $this->taskHandlers[$player->getName()] = Server::getInstance()->getScheduler()->scheduleDelayedRepeatingTask(new HealTask($player, $this->owner), $delay = ((int) $this->owner->getConfig()->get("delay")), $delay);
     }
 
     /** @param PlayerBedLeaveEvent $event */
