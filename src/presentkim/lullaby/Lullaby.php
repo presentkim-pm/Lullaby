@@ -42,7 +42,7 @@ class Lullaby extends PluginBase{
         $this->load();
         $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
 
-        $this->taskHandler = $this->getServer()->getScheduler()->scheduleRepeatingTask(new SetSleepTickTask(), 30);
+        $this->taskHandler = $this->getServer()->getScheduler()->scheduleRepeatingTask(new SetSleepTickTask($this), 30);
     }
 
     public function onDisable() : void{

@@ -4,20 +4,17 @@ namespace presentkim\lullaby\task;
 
 use pocketmine\Player;
 use pocketmine\event\entity\EntityRegainHealthEvent;
-use pocketmine\scheduler\Task;
+use pocketmine\scheduler\PluginTask;
 use presentkim\lullaby\Lullaby as Plugin;
 
-class HealTask extends Task{
+class HealTask extends PluginTask{
 
     /** @var Player */
     public $player;
 
-    /** @var Plugin */
-    private $owner;
-
     public function __construct(Player $player, Plugin $owner){
+        parent::__construct($owner);
         $this->player = $player;
-        $this->owner = $owner;
     }
 
     public function onRun(int $currentTick){

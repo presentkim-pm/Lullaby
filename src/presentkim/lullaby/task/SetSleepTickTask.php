@@ -3,9 +3,9 @@
 namespace presentkim\lullaby\task;
 
 use pocketmine\Server;
-use pocketmine\scheduler\Task;
+use pocketmine\scheduler\PluginTask;
 
-class SetSleepTickTask extends Task{
+class SetSleepTickTask extends PluginTask{
 
     public function onRun(int $currentTick){
         foreach (Server::getInstance()->getLevels() as $key => $value) {
