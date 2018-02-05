@@ -5,7 +5,7 @@ namespace presentkim\lullaby\command;
 use pocketmine\command\{
   Command, PluginCommand, CommandExecutor, CommandSender, ConsoleCommandSender
 };
-use presentkim\lullaby\LullabyMain as Plugin;
+use presentkim\lullaby\Lullaby as Plugin;
 use presentkim\lullaby\util\Translation;
 
 class PoolCommand extends PluginCommand implements CommandExecutor{

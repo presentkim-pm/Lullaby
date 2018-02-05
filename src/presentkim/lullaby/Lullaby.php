@@ -14,7 +14,7 @@ use presentkim\lullaby\command\subcommands\{
 use presentkim\lullaby\util\Translation;
 use presentkim\lullaby\listener\PlayerEventListener;
 
-class LullabyMain extends PluginBase{
+class Lullaby extends PluginBase{
 
     /** @var self */
     private static $instance = null;

@@ -2,7 +2,7 @@
 
 namespace presentkim\lullaby\util;
 
-use presentkim\lullaby\LullabyMain as Plugin;
+use presentkim\lullaby\Lullaby as Plugin;
 
 class Translation{
 

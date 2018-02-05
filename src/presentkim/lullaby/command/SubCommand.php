@@ -3,7 +3,7 @@
 namespace presentkim\lullaby\command;
 
 use pocketmine\command\CommandSender;
-use presentkim\lullaby\LullabyMain as Plugin;
+use presentkim\lullaby\Lullaby as Plugin;
 use presentkim\lullaby\util\{
   Translation, Utils
 };

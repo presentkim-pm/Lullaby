@@ -16,7 +16,7 @@ use pocketmine\scheduler\{
   Task, TaskHandler
 };
 use pocketmine\utils\TextFormat;
-use presentkim\lullaby\LullabyMain as Plugin;
+use presentkim\lullaby\Lullaby as Plugin;
 
 class PlayerEventListener implements Listener{
 
