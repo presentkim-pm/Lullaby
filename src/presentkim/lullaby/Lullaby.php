@@ -14,7 +14,7 @@ use presentkim\lullaby\util\Translation;
 
 class Lullaby extends PluginBase{
 
-    /** @var self */
+    /** @var Lullaby */
     private static $instance = null;
 
     /** @var string */
@@ -23,8 +23,8 @@ class Lullaby extends PluginBase{
     /** @var TaskHandler */
     private $taskHandler = null;
 
-    /** @return self */
-    public static function getInstance() : self{
+    /** @return Lullaby */
+    public static function getInstance() : Lullaby{
         return self::$instance;
     }
 
