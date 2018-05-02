@@ -10,7 +10,7 @@ use blugin\lullaby\command\subcommands\{
 };
 use blugin\lullaby\listener\PlayerEventListener;
 use blugin\lullaby\task\SetSleepTickTask;
-use blugin\lullaby\util\Translation;
+use blugin\lullaby\lang\PluginLang;
 
 class Lullaby extends PluginBase{
 
@@ -28,11 +28,11 @@ class Lullaby extends PluginBase{
     /** @var PoolCommand */
     private $command;
 
+    /** @var PluginLang */
+    private $language;
+
     public function onLoad() : void{
-        if (self::$instance === null) {
-            self::$instance = $this;
-            Translation::loadFromResource($this->getResource('lang/eng.yml'), true);
-        }
+        self::$instance = $this;
     }
 
     public function onEnable() : void{
@@ -40,17 +40,8 @@ class Lullaby extends PluginBase{
         if (!file_exists($dataFolder)) {
             mkdir($dataFolder, 0777, true);
         }
+        $this->language = new PluginLang($this);
         $this->reloadConfig();
-
-        $langfilename = $dataFolder . 'lang.yml';
-        if (!file_exists($langfilename)) {
-            $resource = $this->getResource('lang/eng.yml');
-            fwrite($fp = fopen("{$dataFolder}lang.yml", "wb"), $contents = stream_get_contents($resource));
-            fclose($fp);
-            Translation::loadFromContents($contents);
-        } else {
-            Translation::load($langfilename);
-        }
 
         if ($this->command == null) {
             $this->command = new PoolCommand($this, 'lullaby');
@@ -88,8 +79,22 @@ class Lullaby extends PluginBase{
         return $this->command;
     }
 
-    /** @param PoolCommand $command */
-    public function setCommand(PoolCommand $command) : void{
-        $this->command = $command;
+    /**
+     * @return PluginLang
+     */
+    public function getLanguage() : PluginLang{
+        return $this->language;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSourceFolder() : string{
+        $pharPath = \Phar::running();
+        if (empty($pharPath)) {
+            return dirname(__FILE__, 4) . DIRECTORY_SEPARATOR;
+        } else {
+            return $pharPath . DIRECTORY_SEPARATOR;
+        }
     }
 }
