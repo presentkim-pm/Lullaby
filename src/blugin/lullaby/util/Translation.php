@@ -1,8 +1,8 @@
 <?php
 
-namespace presentkim\lullaby\util;
+namespace blugin\lullaby\util;
 
-use presentkim\lullaby\Lullaby as Plugin;
+use blugin\lullaby\Lullaby as Plugin;
 
 class Translation{
 

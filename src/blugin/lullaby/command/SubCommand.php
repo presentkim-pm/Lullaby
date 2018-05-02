@@ -1,10 +1,10 @@
 <?php
 
-namespace presentkim\lullaby\command;
+namespace blugin\lullaby\command;
 
 use pocketmine\command\CommandSender;
-use presentkim\lullaby\Lullaby as Plugin;
-use presentkim\lullaby\util\{
+use blugin\lullaby\Lullaby as Plugin;
+use blugin\lullaby\util\{
   Translation, Utils
 };
 

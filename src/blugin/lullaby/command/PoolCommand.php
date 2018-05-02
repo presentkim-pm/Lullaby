@@ -1,12 +1,12 @@
 <?php
 
-namespace presentkim\lullaby\command;
+namespace blugin\lullaby\command;
 
 use pocketmine\command\{
   Command, PluginCommand, CommandExecutor, CommandSender, ConsoleCommandSender
 };
-use presentkim\lullaby\Lullaby as Plugin;
-use presentkim\lullaby\util\Translation;
+use blugin\lullaby\Lullaby as Plugin;
+use blugin\lullaby\util\Translation;
 
 class PoolCommand extends PluginCommand implements CommandExecutor{
 

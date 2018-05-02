@@ -1,13 +1,13 @@
 <?php
 
-namespace presentkim\lullaby\command\subcommands;
+namespace blugin\lullaby\command\subcommands;
 
 use pocketmine\command\CommandSender;
-use presentkim\lullaby\Lullaby as Plugin;
-use presentkim\lullaby\command\{
+use blugin\lullaby\Lullaby as Plugin;
+use blugin\lullaby\command\{
   PoolCommand, SubCommand
 };
-use presentkim\lullaby\util\Utils;
+use blugin\lullaby\util\Utils;
 
 class DelaySubCommand extends SubCommand{
 

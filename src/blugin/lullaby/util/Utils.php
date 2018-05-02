@@ -1,6 +1,6 @@
 <?php
 
-namespace presentkim\lullaby\util;
+namespace blugin\lullaby\util;
 
 class Utils{
 

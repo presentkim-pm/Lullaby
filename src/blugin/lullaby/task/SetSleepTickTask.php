@@ -1,6 +1,6 @@
 <?php
 
-namespace presentkim\lullaby\task;
+namespace blugin\lullaby\task;
 
 use pocketmine\Server;
 use pocketmine\scheduler\PluginTask;
