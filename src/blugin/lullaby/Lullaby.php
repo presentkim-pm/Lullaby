@@ -36,23 +36,10 @@ class Lullaby extends PluginBase{
     }
 
     public function onEnable() : void{
-        $this->load();
-        $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
-
-        $this->taskHandler = $this->getServer()->getScheduler()->scheduleRepeatingTask(new SetSleepTickTask($this), 30);
-    }
-
-    public function onDisable() : void{
-        $this->save();
-        $this->taskHandler->cancel();
-    }
-
-    public function load() : void{
         $dataFolder = $this->getDataFolder();
         if (!file_exists($dataFolder)) {
             mkdir($dataFolder, 0777, true);
         }
-
         $this->reloadConfig();
 
         $langfilename = $dataFolder . 'lang.yml';
@@ -65,19 +52,6 @@ class Lullaby extends PluginBase{
             Translation::load($langfilename);
         }
 
-        $this->reloadCommand();
-    }
-
-    public function save() : void{
-        $dataFolder = $this->getDataFolder();
-        if (!file_exists($dataFolder)) {
-            mkdir($dataFolder, 0777, true);
-        }
-
-        $this->saveConfig();
-    }
-
-    public function reloadCommand() : void{
         if ($this->command == null) {
             $this->command = new PoolCommand($this, 'lullaby');
             $this->command->createSubCommand(DelaySubCommand::class);
@@ -89,6 +63,20 @@ class Lullaby extends PluginBase{
             $this->getServer()->getCommandMap()->unregister($this->command);
         }
         $this->getServer()->getCommandMap()->register(strtolower($this->getName()), $this->command);
+
+        $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
+
+        $this->taskHandler = $this->getServer()->getScheduler()->scheduleRepeatingTask(new SetSleepTickTask($this), 30);
+    }
+
+    public function onDisable() : void{
+        $dataFolder = $this->getDataFolder();
+        if (!file_exists($dataFolder)) {
+            mkdir($dataFolder, 0777, true);
+        }
+        $this->saveConfig();
+
+        $this->taskHandler->cancel();
     }
 
     /**
