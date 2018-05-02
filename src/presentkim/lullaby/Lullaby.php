@@ -6,7 +6,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\TaskHandler;
 use presentkim\lullaby\command\PoolCommand;
 use presentkim\lullaby\command\subcommands\{
-  DelaySubCommand, HealSubCommand, LangSubCommand, ReloadSubCommand, SaveSubCommand
+  DelaySubCommand, HealSubCommand
 };
 use presentkim\lullaby\listener\PlayerEventListener;
 use presentkim\lullaby\task\SetSleepTickTask;
@@ -86,9 +86,6 @@ class Lullaby extends PluginBase{
             $this->command = new PoolCommand($this, 'lullaby');
             $this->command->createSubCommand(DelaySubCommand::class);
             $this->command->createSubCommand(HealSubCommand::class);
-            $this->command->createSubCommand(LangSubCommand::class);
-            $this->command->createSubCommand(ReloadSubCommand::class);
-            $this->command->createSubCommand(SaveSubCommand::class);
         }
         $this->command->updateTranslation();
         $this->command->updateSudCommandTranslation();

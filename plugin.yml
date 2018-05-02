@@ -18,13 +18,4 @@ permissions:
       lullaby.cmd.delay:
         description:  Lullaby command - delay
         default:      op
-      lullaby.cmd.lang:
-        description:  Lullaby command - lang
-        default:      op
-      lullaby.cmd.reload:
-        description:  Lullaby command - reload
-        default:      op
-      lullaby.cmd.save:
-        description:  Lullaby command - save
-        default:      op
 ...

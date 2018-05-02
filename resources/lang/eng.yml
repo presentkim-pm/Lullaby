@@ -20,20 +20,4 @@ command-lullaby-delay@usage: "/lullaby Delay <tick>"
 command-lullaby-delay@success: "You have successfully set up a delay to {%0} tick"
 command-lullaby-delay@failure: "{%0} is invalid value, You can't heal to speed less than zero"
 command-lullaby-delay@aliases: ["d"]
-
-command-lullaby-lang: "lang"
-command-lullaby-lang@usage: "/lullaby Lang <language prefix>"
-command-lullaby-lang@success: "You have successfully load {%0} language file."
-command-lullaby-lang@failure: "{%0} is undefined language prefix"
-command-lullaby-lang@aliases: ["language"]
-
-command-lullaby-reload: "reload"
-command-lullaby-reload@usage: "/lullaby Reload"
-command-lullaby-reload@success: "All data reloaded successfully"
-command-lullaby-reload@aliases: ["rl"]
-
-command-lullaby-save: "save"
-command-lullaby-save@usage: "/lullaby Save"
-command-lullaby-save@success: "All data saved successfully"
-command-lullaby-save@aliases: ["sv"]
 ...
