@@ -17,9 +17,6 @@ class Lullaby extends PluginBase{
     /** @var Lullaby */
     private static $instance = null;
 
-    /** @var string */
-    public static $prefix = '';
-
     /** @var TaskHandler */
     private $taskHandler = null;
 
@@ -68,7 +65,6 @@ class Lullaby extends PluginBase{
             Translation::load($langfilename);
         }
 
-        self::$prefix = Translation::translate('prefix');
         $this->reloadCommand();
     }
 
