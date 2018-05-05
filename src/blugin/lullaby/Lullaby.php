@@ -2,17 +2,17 @@
 
 namespace blugin\lullaby;
 
+use pocketmine\command\{
+  Command, PluginCommand, CommandExecutor, CommandSender
+};
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\TaskHandler;
-use blugin\lullaby\command\PoolCommand;
-use blugin\lullaby\command\subcommands\{
-  DelaySubCommand, HealSubCommand
-};
-use blugin\lullaby\listener\PlayerEventListener;
-use blugin\lullaby\task\SetSleepTickTask;
 use blugin\lullaby\lang\PluginLang;
+use blugin\lullaby\listener\PlayerEventListener;
+use blugin\lullaby\subcommand\SubcommandSetter;
+use blugin\lullaby\task\SetSleepTickTask;
 
-class Lullaby extends PluginBase{
+class Lullaby extends PluginBase implements CommandExecutor{
 
     /** @var Lullaby */
     private static $instance = null;
@@ -25,11 +25,14 @@ class Lullaby extends PluginBase{
         return self::$instance;
     }
 
-    /** @var PoolCommand */
+    /** @var PluginCommand */
     private $command;
 
     /** @var PluginLang */
     private $language;
+
+    /** @var SubcommandSetter[] */
+    private $subcommands = [];
 
     public function onLoad() : void{
         self::$instance = $this;
@@ -40,23 +43,25 @@ class Lullaby extends PluginBase{
         if (!file_exists($dataFolder)) {
             mkdir($dataFolder, 0777, true);
         }
-        $this->language = new PluginLang($this);
         $this->reloadConfig();
+        $this->language = new PluginLang($this);
 
-        if ($this->command == null) {
-            $this->command = new PoolCommand($this, 'lullaby');
-            $this->command->createSubCommand(DelaySubCommand::class);
-            $this->command->createSubCommand(HealSubCommand::class);
-        }
-        $this->command->updateTranslation();
-        $this->command->updateSudCommandTranslation();
-        if ($this->command->isRegistered()) {
+        if ($this->command !== null) {
             $this->getServer()->getCommandMap()->unregister($this->command);
         }
-        $this->getServer()->getCommandMap()->register(strtolower($this->getName()), $this->command);
+        $this->command = new PluginCommand($this->language->translate('commands.lullaby'), $this);
+        $this->command->setPermission('lullaby.cmd');
+        $this->command->setDescription($this->language->translate('commands.lullaby.description'));
+        $this->command->setUsage($this->language->translate('commands.lullaby.usage'));
+        if (is_array($aliases = $this->language->getArray('commands.lullaby.aliases'))) {
+            $this->command->setAliases($aliases);
+        }
+        $this->getServer()->getCommandMap()->register('lullaby', $this->command);
+
+        $this->subcommands[] = new SubcommandSetter($this, 'heal');
+        $this->subcommands[] = new SubcommandSetter($this, 'delay');
 
         $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
-
         $this->taskHandler = $this->getServer()->getScheduler()->scheduleRepeatingTask(new SetSleepTickTask($this), 30);
     }
 
@@ -71,11 +76,33 @@ class Lullaby extends PluginBase{
     }
 
     /**
+     * @param CommandSender $sender
+     * @param Command       $command
+     * @param string        $label
+     * @param string[]      $args
+     *
+     * @return bool
+     */
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
+        if (isset($args[0])) {
+            $tag = array_shift($args);
+            foreach ($this->subcommands as $key => $value) {
+                if ($value->validate($tag)) {
+                    $value->execute($sender, $args);
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
+    /**
      * @param string $name = ''
      *
-     * @return PoolCommand
+     * @return PluginCommand
      */
-    public function getCommand(string $name = '') : PoolCommand{
+    public function getCommand(string $name = '') : PluginCommand{
         return $this->command;
     }
 
