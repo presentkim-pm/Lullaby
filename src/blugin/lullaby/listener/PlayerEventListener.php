@@ -44,7 +44,7 @@ class PlayerEventListener implements Listener{
     }
 
     /**
-     * @priority        HIGHEST\
+     * @priority HIGHEST
      *
      * @param PlayerInteractEvent $event
      */
