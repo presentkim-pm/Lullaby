@@ -12,25 +12,25 @@ use pocketmine\event\player\{
 };
 use pocketmine\utils\TextFormat;
 use pocketmine\scheduler\TaskHandler;
-use blugin\lullaby\Lullaby as Plugin;
+use blugin\lullaby\Lullaby;
 use blugin\lullaby\task\HealTask;
 
 class PlayerEventListener implements Listener{
 
-    /** @var Plugin */
+    /** @var Lullaby */
     private $owner = null;
 
     /** @var TaskHandler[] TaskHandler[string] */
     private $taskHandlers = [];
 
     public function __construct(){
-        $this->owner = Plugin::getInstance();
+        $this->owner = Lullaby::getInstance();
     }
 
     /** @param PlayerBedEnterEvent $event */
     public function onPlayerBedEnterEven(PlayerBedEnterEvent $event) : void{
         $player = $event->getPlayer();
-        $this->taskHandlers[$player->getName()] = Server::getInstance()->getScheduler()->scheduleDelayedRepeatingTask(new HealTask($player, $this->owner), $delay = ((int) $this->owner->getConfig()->get(Plugin::DELAY_TAG)), $delay);
+        $this->taskHandlers[$player->getName()] = Server::getInstance()->getScheduler()->scheduleDelayedRepeatingTask(new HealTask($player, $this->owner), $delay = ((int) $this->owner->getConfig()->get(Lullaby::DELAY_TAG)), $delay);
     }
 
     /** @param PlayerBedLeaveEvent $event */
