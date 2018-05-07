@@ -14,6 +14,9 @@ use blugin\lullaby\task\SetSleepTickTask;
 
 class Lullaby extends PluginBase implements CommandExecutor{
 
+    public const HEAL_TAG = 'heal';
+    public const DELAY_TAG = 'delay';
+
     /** @var Lullaby */
     private static $instance = null;
 
@@ -58,8 +61,8 @@ class Lullaby extends PluginBase implements CommandExecutor{
         }
         $this->getServer()->getCommandMap()->register('lullaby', $this->command);
 
-        $this->subcommands[] = new SubcommandSetter($this, 'heal');
-        $this->subcommands[] = new SubcommandSetter($this, 'delay');
+        $this->subcommands[] = new SubcommandSetter($this, self::HEAL_TAG);
+        $this->subcommands[] = new SubcommandSetter($this, self::DELAY_TAG);
 
         $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
         $this->taskHandler = $this->getServer()->getScheduler()->scheduleRepeatingTask(new SetSleepTickTask($this), 30);

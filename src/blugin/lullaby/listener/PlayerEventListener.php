@@ -30,7 +30,7 @@ class PlayerEventListener implements Listener{
     /** @param PlayerBedEnterEvent $event */
     public function onPlayerBedEnterEven(PlayerBedEnterEvent $event) : void{
         $player = $event->getPlayer();
-        $this->taskHandlers[$player->getName()] = Server::getInstance()->getScheduler()->scheduleDelayedRepeatingTask(new HealTask($player, $this->owner), $delay = ((int) $this->owner->getConfig()->get("delay")), $delay);
+        $this->taskHandlers[$player->getName()] = Server::getInstance()->getScheduler()->scheduleDelayedRepeatingTask(new HealTask($player, $this->owner), $delay = ((int) $this->owner->getConfig()->get(Plugin::DELAY_TAG)), $delay);
     }
 
     /** @param PlayerBedLeaveEvent $event */

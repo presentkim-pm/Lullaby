@@ -18,6 +18,6 @@ class HealTask extends PluginTask{
     }
 
     public function onRun(int $currentTick){
-        $this->player->heal(new EntityRegainHealthEvent($this->player, ((int) $this->owner->getConfig()->get("heal")), EntityRegainHealthEvent::CAUSE_MAGIC));
+        $this->player->heal(new EntityRegainHealthEvent($this->player, ((int) $this->owner->getConfig()->get(Plugin::HEAL_TAG)), EntityRegainHealthEvent::CAUSE_MAGIC));
     }
 }
