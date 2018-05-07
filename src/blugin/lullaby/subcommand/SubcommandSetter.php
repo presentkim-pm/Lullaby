@@ -45,14 +45,19 @@ class SubcommandSetter{
      */
     public function execute(CommandSender $sender, array $args) : void{
         if (isset($args[0])) {
-            $value = Utils::toInt($args[0], null, function (int $i){
-                return $i >= 0;
-            });
-            if ($value === null) {
-                $sender->sendMessage($this->owner->getLanguage()->translate("commands.lullaby.{$this->tag}.failure", [$args[0]]));
+            if (!is_numeric($args[0])) {
+                $sender->sendMessage($this->owner->getLanguage()->translate('commands.generic.num.notNumber', [$args[0]]));
             } else {
-                $this->owner->getConfig()->set($this->tag, $value);
-                $sender->sendMessage($this->owner->getLanguage()->translate("commands.lullaby.{$this->tag}.success", [(string) $value]));
+                $value = (float) $args[0];
+                if ($value < 1) {
+                    $sender->sendMessage($this->owner->getLanguage()->translate('commands.generic.num.tooSmall', [
+                      $value,
+                      1,
+                    ]));
+                } else {
+                    $this->owner->getConfig()->set($this->tag, $value);
+                    $sender->sendMessage($this->owner->getLanguage()->translate("commands.lullaby.{$this->tag}.success", [(string) $value]));
+                }
             }
         } else {
             $sender->sendMessage($this->usage);
