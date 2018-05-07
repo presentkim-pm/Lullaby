@@ -64,7 +64,7 @@ class Lullaby extends PluginBase implements CommandExecutor{
         $this->subcommands[] = new SubcommandSetter($this, self::HEAL_TAG);
         $this->subcommands[] = new SubcommandSetter($this, self::DELAY_TAG);
 
-        $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener($this), $this);
         $this->taskHandler = $this->getServer()->getScheduler()->scheduleRepeatingTask(new SetSleepTickTask($this), 30);
     }
 
