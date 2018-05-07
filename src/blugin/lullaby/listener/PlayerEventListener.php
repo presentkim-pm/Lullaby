@@ -35,11 +35,10 @@ class PlayerEventListener implements Listener{
 
     /** @param PlayerBedLeaveEvent $event */
     public function onPlayerBedLeaveEvent(PlayerBedLeaveEvent $event) : void{
-        $player = $event->getPlayer();
-        $plyerName = $player->getName();
-        if (isset($this->taskHandlers[$plyerName])) {
-            $this->taskHandlers[$plyerName]->cancel();
-            unset($this->taskHandlers[$plyerName]);
+        $playerName = $event->getPlayer()->getName();
+        if (isset($this->taskHandlers[$playerName])) {
+            $this->taskHandlers[$playerName]->cancel();
+            unset($this->taskHandlers[$playerName]);
         }
     }
 
