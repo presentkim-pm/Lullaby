@@ -2,7 +2,6 @@
 <img src="./assets/icon/index.svg" height="256" width="256">  
 
 [![License](https://img.shields.io/github/license/PMMPPlugin/Lullaby.svg?label=License)](LICENSE)
-[![Poggit](https://poggit.pmmp.io/ci.shield/PMMPPlugin/Lullaby/Lullaby)](https://poggit.pmmp.io/ci/PMMPPlugin/Lullaby)
 [![Release](https://img.shields.io/github/release/PMMPPlugin/Lullaby.svg?label=Release)](https://github.com/PMMPPlugin/Lullaby/releases/latest)
 [![Download](https://img.shields.io/github/downloads/PMMPPlugin/Lullaby/total.svg?label=Download)](https://github.com/PMMPPlugin/Lullaby/releases/latest)
 
