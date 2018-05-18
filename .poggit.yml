@@ -1,0 +1,10 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/Blugin/Lullaby-PMMP
+
+branches:
+- master
+
+projects:
+  Lullaby:
+    path: ""
+    icon: assets/icon/512x512.png
+...
