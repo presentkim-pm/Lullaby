@@ -4,7 +4,7 @@ main:             kim\present\lullaby\Lullaby
 version:          1.2.3
 api:              [3.0.0, 3.0.0-ALPHA10, 3.0.0-ALPHA11, 3.0.0-ALPHA12]
 author:           PresentKim
-website:          https://github.com/PMMPPlugin/Lullaby
+website:          https://github.com/PresentKim/Lullaby-PMMP
 description:      A plugin healing when a player is lying in bed
 
 permissions:
