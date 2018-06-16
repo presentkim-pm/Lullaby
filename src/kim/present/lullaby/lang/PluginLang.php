@@ -7,7 +7,6 @@ namespace kim\present\lullaby\lang;
 use kim\present\lullaby\Lullaby;
 
 class PluginLang{
-
 	public const FALLBACK_LANGUAGE = "eng";
 
 	/**

@@ -13,7 +13,9 @@ class HealTask extends Task{
 	 */
 	private $owner;
 
-	/** @var Player */
+	/**
+	 * @var Player
+	 */
 	public $player;
 
 	public function __construct(Player $player, Lullaby $owner){

@@ -14,24 +14,31 @@ use pocketmine\scheduler\TaskHandler;
 use pocketmine\utils\TextFormat;
 
 class PlayerEventListener implements Listener{
-
-	/** @var Lullaby */
+	/**
+	 * @var Lullaby
+	 */
 	private $owner = null;
 
-	/** @var TaskHandler[] TaskHandler[string] */
+	/**
+	 * @var TaskHandler[] TaskHandler[string]
+	 */
 	private $taskHandlers = [];
 
 	public function __construct(Lullaby $owner){
 		$this->owner = $owner;
 	}
 
-	/** @param PlayerBedEnterEvent $event */
+	/**
+	 * @param PlayerBedEnterEvent $event
+	 */
 	public function onPlayerBedEnterEven(PlayerBedEnterEvent $event) : void{
 		$player = $event->getPlayer();
 		$this->taskHandlers[$player->getName()] = $this->owner->getScheduler()->scheduleDelayedRepeatingTask(new HealTask($player, $this->owner), $delay = ((int) $this->owner->getConfig()->get(Lullaby::DELAY_TAG)), $delay);
 	}
 
-	/** @param PlayerBedLeaveEvent $event */
+	/**
+	 * @param PlayerBedLeaveEvent $event
+	 */
 	public function onPlayerBedLeaveEvent(PlayerBedLeaveEvent $event) : void{
 		$playerName = $event->getPlayer()->getName();
 		if(isset($this->taskHandlers[$playerName])){

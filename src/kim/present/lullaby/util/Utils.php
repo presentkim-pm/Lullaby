@@ -3,7 +3,6 @@
 namespace kim\present\lullaby\util;
 
 class Utils{
-
 	/**
 	 * @param string $str
 	 * @param array  $strs

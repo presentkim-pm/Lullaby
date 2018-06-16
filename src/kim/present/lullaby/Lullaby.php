@@ -12,25 +12,34 @@ use pocketmine\command\{
 use pocketmine\plugin\PluginBase;
 
 class Lullaby extends PluginBase implements CommandExecutor{
-
 	public const HEAL_TAG = 'heal';
 	public const DELAY_TAG = 'delay';
 
-	/** @var Lullaby */
+	/**
+	 * @var Lullaby
+	 */
 	private static $instance = null;
 
-	/** @return Lullaby */
+	/**
+	 * @return Lullaby
+	 */
 	public static function getInstance() : Lullaby{
 		return self::$instance;
 	}
 
-	/** @var PluginCommand */
+	/**
+	 * @var PluginCommand
+	 */
 	private $command;
 
-	/** @var PluginLang */
+	/**
+	 * @var PluginLang
+	 */
 	private $language;
 
-	/** @var SubcommandSetter[] */
+	/**
+	 * @var SubcommandSetter[]
+	 */
 	private $subcommands = [];
 
 	public function onLoad() : void{
