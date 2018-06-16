@@ -10,7 +10,6 @@ use pocketmine\command\{
 	Command, CommandExecutor, CommandSender, PluginCommand
 };
 use pocketmine\plugin\PluginBase;
-use pocketmine\scheduler\TaskHandler;
 
 class Lullaby extends PluginBase implements CommandExecutor{
 
@@ -19,9 +18,6 @@ class Lullaby extends PluginBase implements CommandExecutor{
 
 	/** @var Lullaby */
 	private static $instance = null;
-
-	/** @var TaskHandler */
-	private $taskHandler = null;
 
 	/** @return Lullaby */
 	public static function getInstance() : Lullaby{
@@ -65,7 +61,7 @@ class Lullaby extends PluginBase implements CommandExecutor{
 		$this->subcommands[] = new SubcommandSetter($this, self::DELAY_TAG);
 
 		$this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener($this), $this);
-		$this->taskHandler = $this->getServer()->getScheduler()->scheduleRepeatingTask(new SetSleepTickTask($this), 30);
+		$this->getScheduler()->scheduleRepeatingTask(new SetSleepTickTask(), 30);
 	}
 
 	public function onDisable() : void{
@@ -74,8 +70,6 @@ class Lullaby extends PluginBase implements CommandExecutor{
 			mkdir($dataFolder, 0777, true);
 		}
 		$this->saveConfig();
-
-		$this->taskHandler->cancel();
 	}
 
 	/**

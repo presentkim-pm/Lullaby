@@ -11,7 +11,6 @@ use pocketmine\event\player\{
 };
 use pocketmine\lang\TranslationContainer;
 use pocketmine\scheduler\TaskHandler;
-use pocketmine\Server;
 use pocketmine\utils\TextFormat;
 
 class PlayerEventListener implements Listener{
@@ -29,7 +28,7 @@ class PlayerEventListener implements Listener{
 	/** @param PlayerBedEnterEvent $event */
 	public function onPlayerBedEnterEven(PlayerBedEnterEvent $event) : void{
 		$player = $event->getPlayer();
-		$this->taskHandlers[$player->getName()] = Server::getInstance()->getScheduler()->scheduleDelayedRepeatingTask(new HealTask($player, $this->owner), $delay = ((int) $this->owner->getConfig()->get(Lullaby::DELAY_TAG)), $delay);
+		$this->taskHandlers[$player->getName()] = $this->owner->getScheduler()->scheduleDelayedRepeatingTask(new HealTask($player, $this->owner), $delay = ((int) $this->owner->getConfig()->get(Lullaby::DELAY_TAG)), $delay);
 	}
 
 	/** @param PlayerBedLeaveEvent $event */
