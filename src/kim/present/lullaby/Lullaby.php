@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace kim\present\lullaby;
 
 use kim\present\lullaby\lang\PluginLang;

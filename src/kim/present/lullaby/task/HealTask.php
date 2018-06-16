@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace kim\present\lullaby\task;
 
 use kim\present\lullaby\Lullaby;
