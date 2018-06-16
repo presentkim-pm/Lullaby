@@ -5,12 +5,11 @@ namespace kim\present\lullaby\listener;
 use kim\present\lullaby\Lullaby;
 use kim\present\lullaby\task\HealTask;
 use pocketmine\block\Bed;
-use pocketmine\event\{
-	Listener, TranslationContainer
-};
+use pocketmine\event\Listener;
 use pocketmine\event\player\{
 	PlayerBedEnterEvent, PlayerBedLeaveEvent, PlayerInteractEvent
 };
+use pocketmine\lang\TranslationContainer;
 use pocketmine\scheduler\TaskHandler;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;
