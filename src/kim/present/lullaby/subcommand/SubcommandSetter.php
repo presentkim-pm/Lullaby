@@ -1,10 +1,10 @@
 <?php
 
-namespace blugin\lullaby\subcommand;
+namespace kim\present\lullaby\subcommand;
 
 use pocketmine\command\CommandSender;
-use blugin\lullaby\Lullaby;
-use blugin\lullaby\util\Utils;
+use kim\present\lullaby\Lullaby;
+use kim\present\lullaby\util\Utils;
 
 class SubcommandSetter{
 

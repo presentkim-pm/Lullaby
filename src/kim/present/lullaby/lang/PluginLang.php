@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace blugin\lullaby\lang;
+namespace kim\present\lullaby\lang;
 
-use blugin\lullaby\Lullaby;
+use kim\present\lullaby\Lullaby;
 
 class PluginLang{
 
