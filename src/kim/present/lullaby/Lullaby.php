@@ -1,16 +1,16 @@
 <?php
 
-namespace blugin\lullaby;
+namespace kim\present\lullaby;
 
 use pocketmine\command\{
   Command, PluginCommand, CommandExecutor, CommandSender
 };
 use pocketmine\plugin\PluginBase;
 use pocketmine\scheduler\TaskHandler;
-use blugin\lullaby\lang\PluginLang;
-use blugin\lullaby\listener\PlayerEventListener;
-use blugin\lullaby\subcommand\SubcommandSetter;
-use blugin\lullaby\task\SetSleepTickTask;
+use kim\present\lullaby\lang\PluginLang;
+use kim\present\lullaby\listener\PlayerEventListener;
+use kim\present\lullaby\subcommand\SubcommandSetter;
+use kim\present\lullaby\task\SetSleepTickTask;
 
 class Lullaby extends PluginBase implements CommandExecutor{
 

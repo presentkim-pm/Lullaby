@@ -1,6 +1,6 @@
 <?php
 
-namespace blugin\lullaby\listener;
+namespace kim\present\lullaby\listener;
 
 use pocketmine\Server;
 use pocketmine\block\Bed;
@@ -12,8 +12,8 @@ use pocketmine\event\player\{
 };
 use pocketmine\utils\TextFormat;
 use pocketmine\scheduler\TaskHandler;
-use blugin\lullaby\Lullaby;
-use blugin\lullaby\task\HealTask;
+use kim\present\lullaby\Lullaby;
+use kim\present\lullaby\task\HealTask;
 
 class PlayerEventListener implements Listener{
 

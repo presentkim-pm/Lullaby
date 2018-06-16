@@ -1,11 +1,11 @@
 <?php
 
-namespace blugin\lullaby\task;
+namespace kim\present\lullaby\task;
 
 use pocketmine\Player;
 use pocketmine\event\entity\EntityRegainHealthEvent;
 use pocketmine\scheduler\PluginTask;
-use blugin\lullaby\Lullaby;
+use kim\present\lullaby\Lullaby;
 
 class HealTask extends PluginTask{
 
