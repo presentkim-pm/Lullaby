@@ -22,8 +22,8 @@ class PlayerEventListener implements Listener{
 	/** @var TaskHandler[] TaskHandler[string] */
 	private $taskHandlers = [];
 
-	public function __construct(Lullaby $onwer){
-		$this->owner = $onwer;
+	public function __construct(Lullaby $owner){
+		$this->owner = $owner;
 	}
 
 	/** @param PlayerBedEnterEvent $event */
