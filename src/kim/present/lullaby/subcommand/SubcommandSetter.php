@@ -9,29 +9,19 @@ use kim\present\lullaby\util\Utils;
 use pocketmine\command\CommandSender;
 
 class SubcommandSetter{
-	/**
-	 * @var Plugin
-	 */
+	/** @var Plugin */
 	public $owner;
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	public $label;
 
-	/**
-	 * @var string[]
-	 */
+	/** @var string[] */
 	public $aliases;
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	public $usage;
 
-	/**
-	 * @var string
-	 */
+	/** @var string */
 	public $tag;
 
 	/**
