@@ -17,9 +17,7 @@ class Lullaby extends PluginBase implements CommandExecutor{
 	public const HEAL_TAG = 'heal';
 	public const DELAY_TAG = 'delay';
 
-	/**
-	 * @var Lullaby
-	 */
+	/** @var Lullaby */
 	private static $instance = null;
 
 	/**
@@ -29,26 +27,26 @@ class Lullaby extends PluginBase implements CommandExecutor{
 		return self::$instance;
 	}
 
-	/**
-	 * @var PluginCommand
-	 */
+	/** @var PluginCommand */
 	private $command;
 
-	/**
-	 * @var PluginLang
-	 */
+	/** @var PluginLang */
 	private $language;
 
-	/**
-	 * @var SubcommandSetter[]
-	 */
+	/** @var SubcommandSetter[] */
 	private $subcommands = [];
 
-	public function onLoad() : void{
+	/**
+	 * Called when the plugin is loaded, before calling onEnable()
+	 */
+	protected function onLoad() : void{
 		self::$instance = $this;
 	}
 
-	public function onEnable() : void{
+	/**
+	 * Called when the plugin is enabled
+	 */
+	protected function onEnable() : void{
 		$dataFolder = $this->getDataFolder();
 		if(!file_exists($dataFolder)){
 			mkdir($dataFolder, 0777, true);
@@ -75,7 +73,11 @@ class Lullaby extends PluginBase implements CommandExecutor{
 		$this->getScheduler()->scheduleRepeatingTask(new SetSleepTickTask(), 30);
 	}
 
-	public function onDisable() : void{
+	/**
+	 * Called when the plugin is disabled
+	 * Use this to free open things and finish actions
+	 */
+	protected function onDisable() : void{
 		$dataFolder = $this->getDataFolder();
 		if(!file_exists($dataFolder)){
 			mkdir($dataFolder, 0777, true);

@@ -16,14 +16,10 @@ use pocketmine\scheduler\TaskHandler;
 use pocketmine\utils\TextFormat;
 
 class PlayerEventListener implements Listener{
-	/**
-	 * @var Lullaby
-	 */
+	/** @var Lullaby */
 	private $owner = null;
 
-	/**
-	 * @var TaskHandler[] TaskHandler[string]
-	 */
+	/** @var TaskHandler[] TaskHandler[string] */
 	private $taskHandlers = [];
 
 	public function __construct(Lullaby $owner){

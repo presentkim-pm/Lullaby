@@ -10,14 +10,10 @@ use pocketmine\Player;
 use pocketmine\scheduler\Task;
 
 class HealTask extends Task{
-	/**
-	 * @var Lullaby
-	 */
+	/** @var Lullaby */
 	private $owner;
 
-	/**
-	 * @var Player
-	 */
+	/** @var Player */
 	public $player;
 
 	public function __construct(Player $player, Lullaby $owner){
