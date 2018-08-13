@@ -53,7 +53,7 @@ class PlayerEventListener implements Listener{
 	 */
 	public function onPlayerBedEnterEven(PlayerBedEnterEvent $event) : void{
 		$player = $event->getPlayer();
-		$this->taskHandlers[$player->getName()] = $this->owner->getScheduler()->scheduleDelayedRepeatingTask(new HealTask($player, $this->owner), $delay = ((int) $this->owner->getConfig()->get(Lullaby::DELAY_TAG)), $delay);
+		$this->taskHandlers[$player->getName()] = $this->owner->getScheduler()->scheduleDelayedRepeatingTask(new HealTask($player, $this->owner), $delay = ((int) ($this->owner->getConfig()->get(Lullaby::DELAY_TAG) * 20)), $delay);
 	}
 
 	/**
