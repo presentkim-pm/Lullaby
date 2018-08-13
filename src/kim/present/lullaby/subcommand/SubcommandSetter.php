@@ -9,7 +9,7 @@ use kim\present\lullaby\util\Utils;
 use pocketmine\command\CommandSender;
 
 class SubcommandSetter{
-	/** @var Plugin */
+	/** @var Lullaby */
 	public $owner;
 
 	/** @var string */
@@ -47,11 +47,11 @@ class SubcommandSetter{
 	public function execute(CommandSender $sender, array $args) : void{
 		if(isset($args[0])){
 			if(!is_numeric($args[0])){
-				$sender->sendMessage($this->owner->getLanguage()->translate('commands.generic.num.notNumber', [$args[0]]));
+				$sender->sendMessage($this->owner->getLanguage()->translate("commands.generic.num.notNumber", [$args[0]]));
 			}else{
 				$value = (float) $args[0];
 				if($value < 1){
-					$sender->sendMessage($this->owner->getLanguage()->translate('commands.generic.num.tooSmall', [
+					$sender->sendMessage($this->owner->getLanguage()->translate("commands.generic.num.tooSmall", [
 						$value,
 						1,
 					]));

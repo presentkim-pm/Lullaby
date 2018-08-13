@@ -14,8 +14,8 @@ use pocketmine\command\{
 use pocketmine\plugin\PluginBase;
 
 class Lullaby extends PluginBase implements CommandExecutor{
-	public const HEAL_TAG = 'heal';
-	public const DELAY_TAG = 'delay';
+	public const HEAL_TAG = "heal";
+	public const DELAY_TAG = "delay";
 
 	/** @var Lullaby */
 	private static $instance = null;
@@ -57,14 +57,14 @@ class Lullaby extends PluginBase implements CommandExecutor{
 		if($this->command !== null){
 			$this->getServer()->getCommandMap()->unregister($this->command);
 		}
-		$this->command = new PluginCommand($this->language->translate('commands.lullaby'), $this);
-		$this->command->setPermission('lullaby.cmd');
-		$this->command->setDescription($this->language->translate('commands.lullaby.description'));
-		$this->command->setUsage($this->language->translate('commands.lullaby.usage'));
-		if(is_array($aliases = $this->language->getArray('commands.lullaby.aliases'))){
+		$this->command = new PluginCommand($this->language->translate("commands.lullaby"), $this);
+		$this->command->setPermission("lullaby.cmd");
+		$this->command->setDescription($this->language->translate("commands.lullaby.description"));
+		$this->command->setUsage($this->language->translate("commands.lullaby.usage"));
+		if(is_array($aliases = $this->language->getArray("commands.lullaby.aliases"))){
 			$this->command->setAliases($aliases);
 		}
-		$this->getServer()->getCommandMap()->register('lullaby', $this->command);
+		$this->getServer()->getCommandMap()->register("lullaby", $this->command);
 
 		$this->subcommands[] = new SubcommandSetter($this, self::HEAL_TAG);
 		$this->subcommands[] = new SubcommandSetter($this, self::DELAY_TAG);
@@ -108,11 +108,11 @@ class Lullaby extends PluginBase implements CommandExecutor{
 	}
 
 	/**
-	 * @param string $name = ''
+	 * @param string $name = ""
 	 *
 	 * @return PluginCommand
 	 */
-	public function getCommand(string $name = '') : PluginCommand{
+	public function getCommand(string $name = "") : PluginCommand{
 		return $this->command;
 	}
 
