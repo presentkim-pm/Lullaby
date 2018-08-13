@@ -7,28 +7,3 @@
 
 
 A plugin healing when a player is lying in bed for PocketMine-MP
-
-## Command
-Main command : `/lullaby <heal | delay | lang | reload | save>`
-
-| subcommand | arguments           | description            |
-| ---------- | ------------------- | ---------------------- |
-| Heal       | \<amount\>          | Set heal amount        |
-| Delay      | \<tick\>            | Set heal delay         |
-| Lang       | \<language prefix\> | Load default lang file |
-| Reload     |                     | Reload all data        |
-| Save       |                     | Save all data          |
-
-
-
-
-## Permission
-| permission         | default | description       |
-| ------------------ | ------- | ----------------- |
-| lullaby.cmd        | OP      | main command      |
-|                    |         |                   |
-| lullaby.cmd.heal   | OP      | heal  subcommand  |
-| lullaby.cmd.delay  | OP      | delay subcommand  |
-| lullaby.cmd.lang   | OP      | lang subcommand   |
-| lullaby.cmd.reload | OP      | reload subcommand |
-| lullaby.cmd.save   | OP      | save subcommand   |
