@@ -38,11 +38,20 @@ class HealTask extends Task{
 	/** @var Player */
 	public $player;
 
+	/**
+	 * HealTask constructor.
+	 *
+	 * @param Player  $player
+	 * @param Lullaby $owner
+	 */
 	public function __construct(Player $player, Lullaby $owner){
 		$this->player = $player;
 		$this->owner = $owner;
 	}
 
+	/**
+	 * @param int $currentTick
+	 */
 	public function onRun(int $currentTick){
 		$this->player->heal(new EntityRegainHealthEvent($this->player, ((int) $this->owner->getConfig()->get(Lullaby::HEAL_TAG)), EntityRegainHealthEvent::CAUSE_MAGIC));
 	}
