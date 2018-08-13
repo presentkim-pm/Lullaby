@@ -53,6 +53,6 @@ class HealTask extends Task{
 	 * @param int $currentTick
 	 */
 	public function onRun(int $currentTick){
-		$this->player->heal(new EntityRegainHealthEvent($this->player, ((int) $this->owner->getConfig()->get(Lullaby::HEAL_TAG)), EntityRegainHealthEvent::CAUSE_MAGIC));
+		$this->player->heal(new EntityRegainHealthEvent($this->player, $this->owner->getHealAmount(), EntityRegainHealthEvent::CAUSE_MAGIC));
 	}
 }

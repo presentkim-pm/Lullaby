@@ -44,6 +44,9 @@ class Lullaby extends PluginBase{
 		return self::$instance;
 	}
 
+	/** @var int */
+	private $healAmount, $healDelay;
+
 	/**
 	 * Called when the plugin is loaded, before calling onEnable()
 	 */
@@ -56,7 +59,9 @@ class Lullaby extends PluginBase{
 	 */
 	public function onEnable() : void{
 		//Load config file
-		$this->reloadConfig();
+		$config = $this->getConfig();
+		$this->healAmount = (int) $config->get(Lullaby::HEAL_TAG);
+		$this->healDelay = (int) $config->get(Lullaby::DELAY_TAG);
 
 		//Register event listeners
 		$this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener($this), $this);
@@ -95,5 +100,33 @@ class Lullaby extends PluginBase{
 			return $ret;
 		}
 		return false;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getHealAmount() : int{
+		return $this->healAmount;
+	}
+
+	/**
+	 * @param int $healAmount
+	 */
+	public function setHealAmount(int $healAmount) : void{
+		$this->healAmount = $healAmount;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getHealDelay() : int{
+		return $this->healDelay;
+	}
+
+	/**
+	 * @param int $healDelay
+	 */
+	public function setHealDelay(int $healDelay) : void{
+		$this->healDelay = $healDelay;
 	}
 }
