@@ -55,13 +55,13 @@ class Lullaby extends PluginBase{
 	 * Called when the plugin is enabled
 	 */
 	public function onEnable() : void{
-		$dataFolder = $this->getDataFolder();
-		if(!file_exists($dataFolder)){
-			mkdir($dataFolder, 0777, true);
-		}
+		//Load config file
 		$this->reloadConfig();
 
+		//Register event listeners
 		$this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener($this), $this);
+
+		//Register repeating task
 		$this->getScheduler()->scheduleRepeatingTask(new SetSleepTickTask(), 30);
 	}
 
@@ -75,5 +75,25 @@ class Lullaby extends PluginBase{
 			mkdir($dataFolder, 0777, true);
 		}
 		$this->saveConfig();
+	}
+
+	/**
+	 * @Override for multilingual support of the config file
+	 *
+	 * @return bool
+	 */
+	public function saveDefaultConfig() : bool{
+		$resource = $this->getResource("lang/{$this->getServer()->getLanguage()->getLang()}/config.yml");
+		if($resource === null){
+			$resource = $this->getResource("lang/eng/config.yml");
+		}
+
+		if(!file_exists($configFile = $this->getDataFolder() . "config.yml")){
+			$ret = stream_copy_to_stream($resource, $fp = fopen($configFile, "wb")) > 0;
+			fclose($fp);
+			fclose($resource);
+			return $ret;
+		}
+		return false;
 	}
 }

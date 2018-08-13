@@ -1,0 +1,9 @@
+# Advanced configuration file for Lullaby plugin
+# Some of these settings are safe, others can break your server if modified incorrectly
+# New settings/defaults won't appear automatically on this file when upgrading
+
+#Heal delay
+delay: 100
+
+#Heal amount
+heal: 1
