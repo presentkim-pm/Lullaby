@@ -53,7 +53,13 @@ class PlayerEventListener implements Listener{
 	 */
 	public function onPlayerBedEnterEven(PlayerBedEnterEvent $event) : void{
 		$player = $event->getPlayer();
-		$this->taskHandlers[$player->getName()] = $this->owner->getScheduler()->scheduleRepeatingTask(new HealTask($player, $this->owner->getHealAmount(), $this->owner->getHealDelay(), $event->getBed()), 2);
+		$bed = $event->getBed();
+		$position = $bed->add(
+			([1 => 2, 3 => -2, 9 => 2, 11 => -2][$bed->getDamage()] ?? 0) + 0.5,
+			0.5,
+			([0 => -2, 2 => 2, 8 => -2, 10 => 2][$bed->getDamage()] ?? 0) + 0.5
+		);
+		$this->taskHandlers[$player->getName()] = $this->owner->getScheduler()->scheduleRepeatingTask(new HealTask($player, $this->owner->getHealAmount(), $this->owner->getHealDelay(), $position), 2);
 	}
 
 	/**
