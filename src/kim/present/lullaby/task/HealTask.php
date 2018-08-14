@@ -27,7 +27,7 @@ declare(strict_types=1);
 namespace kim\present\lullaby\task;
 
 use pocketmine\{
-	Player, Server
+	Player, Server, utils\TextFormat
 };
 use pocketmine\entity\Entity;
 use pocketmine\event\entity\EntityRegainHealthEvent;
@@ -38,6 +38,8 @@ use pocketmine\network\mcpe\protocol\{
 use pocketmine\scheduler\Task;
 
 class HealTask extends Task{
+	private const BAR_LENGTH = 30;
+
 	/** @var Player */
 	private $player;
 
@@ -117,6 +119,14 @@ class HealTask extends Task{
 	private function getInfo(int $currentTick) : string{
 		//Line 1 : The animated loading mark
 		$info = "Healing..." . ["-", "\\", ".|", "/"][floor($currentTick / 2) % 4] . "\n";
+
+		//Line 2 : HP bar
+		$health = (int) $this->player->getHealth();
+		$maxHealth = (int) $this->player->getMaxHealth();
+		$percentage = (int) ($health / $maxHealth * self::BAR_LENGTH);
+		$info .= "{$health}/{$maxHealth} ";
+		$info .= TextFormat::GREEN . str_pad("", $percentage, "|");
+		$info .= TextFormat::DARK_GREEN . str_pad("", self::BAR_LENGTH - $percentage, "|") . "\n";
 
 		return $info;
 	}
