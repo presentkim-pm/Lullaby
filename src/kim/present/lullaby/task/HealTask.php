@@ -134,6 +134,6 @@ class HealTask extends Task{
 		$percentage = (int) round(($currentTick - $this->lastTick) / $this->healDelay * self::BAR_LENGTH);
 		$info[2] = TextFormat::BOLD . TextFormat::RED . substr_replace(str_repeat(":", self::BAR_LENGTH), TextFormat::DARK_RED, $percentage, 0);
 
-		return implode("\n", $info);
+		return implode(TextFormat::RESET . "\n", $info);
 	}
 }
