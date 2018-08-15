@@ -27,7 +27,7 @@ declare(strict_types=1);
 namespace kim\present\lullaby\listener;
 
 use kim\present\lullaby\Lullaby;
-use kim\present\lullaby\task\HealTask;
+use kim\present\lullaby\task\HealBedTask;
 use pocketmine\block\Bed;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerBedEnterEvent;
@@ -52,6 +52,6 @@ class PlayerEventListener implements Listener{
 		$player = $event->getPlayer();
 		$bed = $event->getBed();
 		$position = $bed->asVector3()->getSide(Bed::getOtherHalfSide($bed->getDamage(), true))->add(0.5, 0.5, 0.5);
-		$this->owner->getScheduler()->scheduleRepeatingTask(new HealTask($player, $this->owner, $position), 2);
+		$this->owner->getScheduler()->scheduleRepeatingTask(new HealBedTask($player, $this->owner, $position), 2);
 	}
 }

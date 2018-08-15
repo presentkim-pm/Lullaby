@@ -39,7 +39,7 @@ use pocketmine\network\mcpe\protocol\{
 use pocketmine\scheduler\Task;
 use pocketmine\utils\TextFormat;
 
-class HealTask extends Task{
+class HealBedTask extends Task{
 	private const BAR_LENGTH = 30;
 
 	/** @var Player */
