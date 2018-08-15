@@ -117,17 +117,20 @@ class HealTask extends Task{
 	 * @return string
 	 */
 	private function getInfo(int $currentTick) : string{
+		/** @var string[] $info */
+		$info = [];
+
 		//Line 1 : The animated loading mark
-		$info = "Healing..." . ["-", "\\", ".|", "/"][floor($currentTick / 2) % 4] . "\n";
+		$info[0] = "Healing..." . ["-", "\\", ".|", "/"][floor($currentTick / 2) % 4];
 
 		//Line 2 : HP bar
 		$health = (int) $this->player->getHealth();
 		$maxHealth = (int) $this->player->getMaxHealth();
 		$percentage = (int) ($health / $maxHealth * self::BAR_LENGTH);
-		$info .= "{$health}/{$maxHealth} ";
-		$info .= TextFormat::GREEN . str_pad("", $percentage, "|");
-		$info .= TextFormat::DARK_GREEN . str_pad("", self::BAR_LENGTH - $percentage, "|") . "\n";
+		$info[1] = "{$health}/{$maxHealth} ";
+		$info[1] .= TextFormat::GREEN . str_pad("", $percentage, "|");
+		$info[1] .= TextFormat::DARK_GREEN . str_pad("", self::BAR_LENGTH - $percentage, "|");
 
-		return $info;
+		return implode("\n", $info);
 	}
 }
