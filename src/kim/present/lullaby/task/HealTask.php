@@ -83,7 +83,7 @@ class HealTask extends Task{
 	/**
 	 * @param int $currentTick
 	 */
-	public function onRun(int $currentTick){
+	public function onRun(int $currentTick) : void{
 		if(!$this->player->isSleeping()){
 			$this->getHandler()->cancel();
 			return;
@@ -108,7 +108,7 @@ class HealTask extends Task{
 	/**
 	 * Actions to execute if the Task is cancelled
 	 */
-	public function onCancel(){
+	public function onCancel() : void{
 		//Despawn floating text
 		$pk = new RemoveEntityPacket();
 		$pk->entityUniqueId = $this->entityUniqueId;
