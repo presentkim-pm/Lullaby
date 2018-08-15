@@ -48,7 +48,7 @@ class PlayerEventListener implements Listener{
 	/**
 	 * @param PlayerBedEnterEvent $event
 	 */
-	public function onPlayerBedEnterEven(PlayerBedEnterEvent $event) : void{
+	public function onPlayerBedEnterEvent(PlayerBedEnterEvent $event) : void{
 		$player = $event->getPlayer();
 		$bed = $event->getBed();
 		$position = $bed->asVector3()->getSide(Bed::getOtherHalfSide($bed->getDamage(), true), 2)->add(0.5, 0.5, 0.5);
