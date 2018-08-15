@@ -128,7 +128,7 @@ class HealTask extends Task{
 		$maxHealth = (int) $this->player->getMaxHealth();
 		$percentage = (int) ($health / $maxHealth * self::BAR_LENGTH);
 		$info[1] = "{$health}/{$maxHealth} ";
-		$info[1] .= TextFormat::GREEN . substr_replace(str_pad("", self::BAR_LENGTH, "|"), TextFormat::DARK_GREEN, $percentage, 0);
+		$info[1] .= TextFormat::GREEN . substr_replace(str_repeat("|", self::BAR_LENGTH), TextFormat::DARK_GREEN, $percentage, 0);
 
 		return implode("\n", $info);
 	}
