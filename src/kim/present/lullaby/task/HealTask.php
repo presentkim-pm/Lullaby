@@ -26,6 +26,7 @@ declare(strict_types=1);
 
 namespace kim\present\lullaby\task;
 
+use kim\present\lullaby\Lullaby;
 use pocketmine\{
 	Player, Server
 };
@@ -44,8 +45,8 @@ class HealTask extends Task{
 	/** @var Player */
 	private $player;
 
-	/** @var int */
-	private $healAmount, $healDelay;
+	/** @var Lullaby */
+	private $plugin;
 
 	/** @var int */
 	private $lastTick, $entityUniqueId;
@@ -54,19 +55,17 @@ class HealTask extends Task{
 	 * HealTask constructor.
 	 *
 	 * @param Player  $player
-	 * @param int     $healAmount
-	 * @param int     $healDelay
+	 * @param Lullaby $plugin
 	 * @param Vector3 $textPosition
 	 */
-	public function __construct(Player $player, int $healAmount, int $healDelay, Vector3 $textPosition){
+	public function __construct(Player $player, Lullaby $plugin, Vector3 $textPosition){
 		//Set default value of properties
 		$this->entityUniqueId = Entity::$entityCount++;
 		$this->lastTick = Server::getInstance()->getTick();
 
 		//Set value of properties from arguments
 		$this->player = $player;
-		$this->healAmount = $healAmount;
-		$this->healDelay = $healDelay;
+		$this->plugin = $plugin;
 
 		//Spawn floating text
 		$pk = new AddEntityPacket();
@@ -100,8 +99,8 @@ class HealTask extends Task{
 		$this->player->sendDataPacket($pk);
 
 		//Healing player per heal delay
-		if($tickDiff > $this->healDelay){
-			$this->player->heal(new EntityRegainHealthEvent($this->player, $this->healAmount, EntityRegainHealthEvent::CAUSE_MAGIC));
+		if($tickDiff > $this->plugin->getHealDelay()){
+			$this->player->heal(new EntityRegainHealthEvent($this->player, $this->plugin->getHealAmount(), EntityRegainHealthEvent::CAUSE_MAGIC));
 			$this->lastTick = $currentTick;
 		}
 	}
@@ -136,7 +135,7 @@ class HealTask extends Task{
 		$info[1] .= TextFormat::GREEN . substr_replace(str_repeat("|", self::BAR_LENGTH), TextFormat::DARK_GREEN, $percentage, 0);
 
 		//Line 3 : Heal progress bar
-		$percentage = (int) round(($currentTick - $this->lastTick) / $this->healDelay * self::BAR_LENGTH);
+		$percentage = (int) round(($currentTick - $this->lastTick) / $this->plugin->getHealDelay() * self::BAR_LENGTH);
 		$info[2] = TextFormat::BOLD . TextFormat::RED . substr_replace(str_repeat(":", self::BAR_LENGTH), TextFormat::DARK_RED, $percentage, 0);
 
 		return implode(TextFormat::RESET . "\n", $info);

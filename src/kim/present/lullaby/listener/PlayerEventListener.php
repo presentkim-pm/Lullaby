@@ -52,6 +52,6 @@ class PlayerEventListener implements Listener{
 		$player = $event->getPlayer();
 		$bed = $event->getBed();
 		$position = $bed->asVector3()->getSide(Bed::getOtherHalfSide($bed->getDamage(), true), 2)->add(0.5, 0.5, 0.5);
-		$this->owner->getScheduler()->scheduleRepeatingTask(new HealTask($player, $this->owner->getHealAmount(), $this->owner->getHealDelay(), $position), 2);
+		$this->owner->getScheduler()->scheduleRepeatingTask(new HealTask($player, $this->owner, $position), 2);
 	}
 }
