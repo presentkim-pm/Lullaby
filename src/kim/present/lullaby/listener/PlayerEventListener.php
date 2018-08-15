@@ -36,6 +36,11 @@ class PlayerEventListener implements Listener{
 	/** @var Lullaby */
 	private $owner = null;
 
+	/**
+	 * PlayerEventListener constructor.
+	 *
+	 * @param Lullaby $owner
+	 */
 	public function __construct(Lullaby $owner){
 		$this->owner = $owner;
 	}
