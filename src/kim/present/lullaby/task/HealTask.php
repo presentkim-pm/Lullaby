@@ -27,7 +27,7 @@ declare(strict_types=1);
 namespace kim\present\lullaby\task;
 
 use pocketmine\{
-	Player, Server, utils\TextFormat
+	Player, Server
 };
 use pocketmine\entity\Entity;
 use pocketmine\event\entity\EntityRegainHealthEvent;
@@ -36,6 +36,7 @@ use pocketmine\network\mcpe\protocol\{
 	AddEntityPacket, RemoveEntityPacket, SetEntityDataPacket
 };
 use pocketmine\scheduler\Task;
+use pocketmine\utils\TextFormat;
 
 class HealTask extends Task{
 	private const BAR_LENGTH = 30;
