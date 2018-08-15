@@ -26,8 +26,10 @@ declare(strict_types=1);
 
 namespace kim\present\lullaby;
 
+use kim\present\lullaby\block\HealBed;
 use kim\present\lullaby\listener\PlayerEventListener;
 use kim\present\lullaby\task\SetSleepTickTask;
+use pocketmine\block\BlockFactory;
 use pocketmine\plugin\PluginBase;
 
 class Lullaby extends PluginBase{
@@ -52,6 +54,9 @@ class Lullaby extends PluginBase{
 	 */
 	public function onLoad() : void{
 		self::$instance = $this;
+
+		//Register heal bed to block factory
+		BlockFactory::registerBlock(new HealBed(), true);
 	}
 
 	/**

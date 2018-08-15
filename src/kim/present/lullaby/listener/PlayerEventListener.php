@@ -28,14 +28,11 @@ namespace kim\present\lullaby\listener;
 
 use kim\present\lullaby\Lullaby;
 use kim\present\lullaby\task\HealTask;
-use pocketmine\block\Bed;
 use pocketmine\event\Listener;
 use pocketmine\event\player\{
-	PlayerBedEnterEvent, PlayerBedLeaveEvent, PlayerInteractEvent
+	PlayerBedEnterEvent, PlayerBedLeaveEvent
 };
-use pocketmine\lang\TranslationContainer;
 use pocketmine\scheduler\TaskHandler;
-use pocketmine\utils\TextFormat;
 
 class PlayerEventListener implements Listener{
 	/** @var Lullaby */
@@ -70,30 +67,6 @@ class PlayerEventListener implements Listener{
 		if(isset($this->taskHandlers[$playerName])){
 			$this->taskHandlers[$playerName]->cancel();
 			unset($this->taskHandlers[$playerName]);
-		}
-	}
-
-	/**
-	 * @priority HIGHEST
-	 *
-	 * @param PlayerInteractEvent $event
-	 */
-	public function onPlayerInteractEvent(PlayerInteractEvent $event) : void{
-		if(!$event->isCancelled()){
-			$block = $event->getBlock();
-			if($block instanceof Bed){
-				$player = $event->getPlayer();
-				$other = $block->getOtherHalf();
-				if($other === null){
-					$player->sendMessage(TextFormat::GRAY . "This bed is incomplete");
-				}elseif($player->distanceSquared($block) > 4 and $player->distanceSquared($other) > 4){
-					$player->sendMessage(new TranslationContainer(TextFormat::GRAY . "%tile.bed.tooFar"));
-				}elseif(($b = ($block->isHeadPart() ? $block : $other))->isOccupied()){
-					$player->sendMessage(new TranslationContainer(TextFormat::GRAY . "%tile.bed.occupied"));
-				}else{
-					$player->sleepOn($b);
-				}
-			}
 		}
 	}
 }
