@@ -121,7 +121,7 @@ class HealTask extends Task{
 		$info = [];
 
 		//Line 1 : The animated loading mark
-		$info[0] = "Healing..." . ["-", "\\", ".|", "/"][floor($currentTick / 2) % 4];
+		$info[0] = "Healing..." . ["-", "\\", ".|.", "/"][floor($currentTick / 2) % 4];
 
 		//Line 2 : HP bar
 		$health = (int) $this->player->getHealth();
