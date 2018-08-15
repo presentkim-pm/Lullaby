@@ -28,6 +28,7 @@ namespace kim\present\lullaby;
 
 use kim\present\lullaby\block\HealBed;
 use kim\present\lullaby\listener\PlayerEventListener;
+use kim\present\lullaby\task\CheckUpdateAsyncTask;
 use kim\present\lullaby\task\SetSleepTickTask;
 use pocketmine\block\BlockFactory;
 use pocketmine\plugin\PluginBase;
@@ -67,6 +68,11 @@ class Lullaby extends PluginBase{
 		$config = $this->getConfig();
 		$this->healAmount = (int) $config->get(Lullaby::HEAL_TAG);
 		$this->healDelay = (int) $config->get(Lullaby::DELAY_TAG);
+
+		//Check latest version
+		if($config->getNested("settings.update-check", false)){
+			$this->getServer()->getAsyncPool()->submitTask(new CheckUpdateAsyncTask());
+		}
 
 		//Register event listeners
 		$this->getServer()->getPluginManager()->registerEvents(new PlayerEventListener($this), $this);
