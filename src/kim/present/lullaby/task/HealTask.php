@@ -85,6 +85,10 @@ class HealTask extends Task{
 	 * @param int $currentTick
 	 */
 	public function onRun(int $currentTick){
+		if(!$this->player->isSleeping()){
+			$this->getHandler()->cancel();
+			return;
+		}
 		$tickDiff = $currentTick - $this->lastTick;
 
 		//Update floating text

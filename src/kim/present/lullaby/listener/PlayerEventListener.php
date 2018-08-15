@@ -30,17 +30,11 @@ use kim\present\lullaby\Lullaby;
 use kim\present\lullaby\task\HealTask;
 use pocketmine\block\Bed;
 use pocketmine\event\Listener;
-use pocketmine\event\player\{
-	PlayerBedEnterEvent, PlayerBedLeaveEvent
-};
-use pocketmine\scheduler\TaskHandler;
+use pocketmine\event\player\PlayerBedEnterEvent;
 
 class PlayerEventListener implements Listener{
 	/** @var Lullaby */
 	private $owner = null;
-
-	/** @var TaskHandler[] TaskHandler[string] */
-	private $taskHandlers = [];
 
 	public function __construct(Lullaby $owner){
 		$this->owner = $owner;
@@ -53,17 +47,6 @@ class PlayerEventListener implements Listener{
 		$player = $event->getPlayer();
 		$bed = $event->getBed();
 		$position = $bed->asVector3()->getSide(Bed::getOtherHalfSide($bed->getDamage(), true), 2)->add(0.5, 0.5, 0.5);
-		$this->taskHandlers[$player->getName()] = $this->owner->getScheduler()->scheduleRepeatingTask(new HealTask($player, $this->owner->getHealAmount(), $this->owner->getHealDelay(), $position), 2);
-	}
-
-	/**
-	 * @param PlayerBedLeaveEvent $event
-	 */
-	public function onPlayerBedLeaveEvent(PlayerBedLeaveEvent $event) : void{
-		$playerName = $event->getPlayer()->getName();
-		if(isset($this->taskHandlers[$playerName])){
-			$this->taskHandlers[$playerName]->cancel();
-			unset($this->taskHandlers[$playerName]);
-		}
+		$this->owner->getScheduler()->scheduleRepeatingTask(new HealTask($player, $this->owner->getHealAmount(), $this->owner->getHealDelay(), $position), 2);
 	}
 }
