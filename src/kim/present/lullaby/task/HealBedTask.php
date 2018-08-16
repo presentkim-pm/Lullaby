@@ -142,11 +142,15 @@ class HealBedTask extends Task{
 		$replacements["ProgressPercentage"] = (string) min(100, (int) ($tickDiff / $this->plugin->getHealDelay() * 100));
 		$replacements["ProgressBar"] = TextFormat::BOLD . TextFormat::RED . substr_replace(str_repeat(":", self::BAR_LENGTH), TextFormat::DARK_RED, $percentage, 0);
 
-		/** @var string[] $pairs */
-		$pairs = [];
+		/**
+		 * @var string[] $pairs
+		 * @var string[] $replace
+		 */
+		$search = $replace = [];
 		foreach($replacements as $key => $value){
-			$pairs["{%$key}"] = $value . TextFormat::RESET;
+			$search[] = "{%$key}";
+			$replace[] = $value . TextFormat::RESET;
 		}
-		return strtr($this->plugin->getFormat(), $pairs);
+		return str_ireplace($search, $replace, $this->plugin->getFormat());
 	}
 }
