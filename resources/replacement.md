@@ -1,7 +1,7 @@
-# Usage
-Write `{%name}` in `format.txt`
-
-#Replacements list
+# Usage  
+Write `{%name}` in `format.txt`  
+  
+#Replacements list  
 | name               | description                |
 | -----------------: | :------------------------- |
 | LoadingMark        | Animated loading mark      |
@@ -12,4 +12,4 @@ Write `{%name}` in `format.txt`
 | HealthBar          | Player's health bar        |
 |                    |                            |
 | ProgressPercentage | Heal progress percentage   |
-| ProgressBar        | Heal progress bar          |
+| ProgressBar        | Heal progress bar          |  
