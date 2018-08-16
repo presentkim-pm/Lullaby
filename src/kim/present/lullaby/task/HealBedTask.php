@@ -133,13 +133,13 @@ class HealBedTask extends Task{
 		$percentage = (int) round($health / $maxHealth * self::BAR_LENGTH);
 		$info["Health"] = (string) $health;
 		$info["MaxHealth"] = (string) $maxHealth;
-		$info["HealthPercentage"] = (string) ((int) ($health / $maxHealth * 100));
+		$info["HealthPercentage"] = (string) min(100, (int) ($health / $maxHealth * 100));
 		$info["HealthBar"] = TextFormat::GREEN . substr_replace(str_repeat("|", self::BAR_LENGTH), TextFormat::DARK_GREEN, $percentage, 0);
 
 		//Line 3 : Heal progress bar
 		$tickDiff = $currentTick - $this->lastTick;
 		$percentage = (int) round($tickDiff / $this->plugin->getHealDelay() * self::BAR_LENGTH);
-		$info["ProgressPercentage"] = (string) ((int) ($tickDiff / $this->plugin->getHealDelay() * 100));
+		$info["ProgressPercentage"] = (string) min(100, (int) ($tickDiff / $this->plugin->getHealDelay() * 100));
 		$info["ProgressBar"] = TextFormat::BOLD . TextFormat::RED . substr_replace(str_repeat(":", self::BAR_LENGTH), TextFormat::DARK_RED, $percentage, 0);
 
 		/** @var string[] $pairs */
