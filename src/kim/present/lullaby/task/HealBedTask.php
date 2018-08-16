@@ -121,30 +121,30 @@ class HealBedTask extends Task{
 	 * @return string
 	 */
 	private function getInfo(int $currentTick) : string{
-		/** @var string[] $info */
-		$info = [];
+		/** @var string[] $replacements */
+		$replacements = [];
 
-		//Line 1 : The animated loading mark
-		$info["LoadingMark"] = ["-", "\\", ".|.", "/"][floor($currentTick / 2) % 4];
+		//Replacements : The animated loading mark
+		$replacements["LoadingMark"] = ["-", "\\", ".|.", "/"][floor($currentTick / 2) % 4];
 
-		//Line 2 : HP bar
+		//Replacements : Player's health
 		$health = (int) $this->player->getHealth();
 		$maxHealth = (int) $this->player->getMaxHealth();
 		$percentage = (int) round($health / $maxHealth * self::BAR_LENGTH);
-		$info["Health"] = (string) $health;
-		$info["MaxHealth"] = (string) $maxHealth;
-		$info["HealthPercentage"] = (string) min(100, (int) ($health / $maxHealth * 100));
-		$info["HealthBar"] = TextFormat::GREEN . substr_replace(str_repeat("|", self::BAR_LENGTH), TextFormat::DARK_GREEN, $percentage, 0);
+		$replacements["Health"] = (string) $health;
+		$replacements["MaxHealth"] = (string) $maxHealth;
+		$replacements["HealthPercentage"] = (string) min(100, (int) ($health / $maxHealth * 100));
+		$replacements["HealthBar"] = TextFormat::GREEN . substr_replace(str_repeat("|", self::BAR_LENGTH), TextFormat::DARK_GREEN, $percentage, 0);
 
-		//Line 3 : Heal progress bar
+		//Replacements : heal progress
 		$tickDiff = $currentTick - $this->lastTick;
 		$percentage = (int) round($tickDiff / $this->plugin->getHealDelay() * self::BAR_LENGTH);
-		$info["ProgressPercentage"] = (string) min(100, (int) ($tickDiff / $this->plugin->getHealDelay() * 100));
-		$info["ProgressBar"] = TextFormat::BOLD . TextFormat::RED . substr_replace(str_repeat(":", self::BAR_LENGTH), TextFormat::DARK_RED, $percentage, 0);
+		$replacements["ProgressPercentage"] = (string) min(100, (int) ($tickDiff / $this->plugin->getHealDelay() * 100));
+		$replacements["ProgressBar"] = TextFormat::BOLD . TextFormat::RED . substr_replace(str_repeat(":", self::BAR_LENGTH), TextFormat::DARK_RED, $percentage, 0);
 
 		/** @var string[] $pairs */
 		$pairs = [];
-		foreach($info as $key => $value){
+		foreach($replacements as $key => $value){
 			$pairs["{%$key}"] = $value . TextFormat::RESET;
 		}
 		return strtr($this->plugin->getFormat(), $pairs);
