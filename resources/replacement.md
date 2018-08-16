@@ -1,7 +1,9 @@
 # Usage  
 Write `{%name}` in `format.txt`  
   
-#Replacements list  
+  
+# Replacements list  
+
 | name               | description                |
 | -----------------: | :------------------------- |
 | LoadingMark        | Animated loading mark      |
