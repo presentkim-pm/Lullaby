@@ -82,18 +82,6 @@ class Lullaby extends PluginBase{
 	}
 
 	/**
-	 * Called when the plugin is disabled
-	 * Use this to free open things and finish actions
-	 */
-	public function onDisable() : void{
-		$dataFolder = $this->getDataFolder();
-		if(!file_exists($dataFolder)){
-			mkdir($dataFolder, 0777, true);
-		}
-		$this->saveConfig();
-	}
-
-	/**
 	 * @Override for multilingual support of the config file
 	 *
 	 * @return bool
