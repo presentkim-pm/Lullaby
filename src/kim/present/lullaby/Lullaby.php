@@ -99,9 +99,9 @@ class Lullaby extends PluginBase{
 	 * @return bool
 	 */
 	public function saveDefaultConfig() : bool{
-		$resource = $this->getResource("lang/{$this->getServer()->getLanguage()->getLang()}/config.yml");
+		$resource = $this->getResource("{$this->getServer()->getLanguage()->getLang()}/config.yml");
 		if($resource === null){
-			$resource = $this->getResource("lang/eng/config.yml");
+			$resource = $this->getResource("eng/config.yml");
 		}
 
 		if(!file_exists($configFile = $this->getDataFolder() . "config.yml")){
