@@ -125,19 +125,28 @@ class HealBedTask extends Task{
 		$info = [];
 
 		//Line 1 : The animated loading mark
-		$info[0] = "Healing..." . ["-", "\\", ".|.", "/"][floor($currentTick / 2) % 4];
+		$info["LoadingMark"] = ["-", "\\", ".|.", "/"][floor($currentTick / 2) % 4];
 
 		//Line 2 : HP bar
 		$health = (int) $this->player->getHealth();
 		$maxHealth = (int) $this->player->getMaxHealth();
 		$percentage = (int) round($health / $maxHealth * self::BAR_LENGTH);
-		$info[1] = "{$health}/{$maxHealth} ";
-		$info[1] .= TextFormat::GREEN . substr_replace(str_repeat("|", self::BAR_LENGTH), TextFormat::DARK_GREEN, $percentage, 0);
+		$info["Health"] = (string) $health;
+		$info["MaxHealth"] = (string) $maxHealth;
+		$info["HealthPercentage"] = (string) ((int) ($health / $maxHealth * 100));
+		$info["HealthBar"] = TextFormat::GREEN . substr_replace(str_repeat("|", self::BAR_LENGTH), TextFormat::DARK_GREEN, $percentage, 0);
 
 		//Line 3 : Heal progress bar
-		$percentage = (int) round(($currentTick - $this->lastTick) / $this->plugin->getHealDelay() * self::BAR_LENGTH);
-		$info[2] = TextFormat::BOLD . TextFormat::RED . substr_replace(str_repeat(":", self::BAR_LENGTH), TextFormat::DARK_RED, $percentage, 0);
+		$tickDiff = $currentTick - $this->lastTick;
+		$percentage = (int) round($tickDiff / $this->plugin->getHealDelay() * self::BAR_LENGTH);
+		$info["ProgressPercentage"] = (string) ((int) ($tickDiff / $this->plugin->getHealDelay() * 100));
+		$info["ProgressBar"] = TextFormat::BOLD . TextFormat::RED . substr_replace(str_repeat(":", self::BAR_LENGTH), TextFormat::DARK_RED, $percentage, 0);
 
-		return implode(TextFormat::RESET . "\n", $info);
+		/** @var string[] $pairs */
+		$pairs = [];
+		foreach($info as $key => $value){
+			$pairs["{%$key}"] = $value . TextFormat::RESET;
+		}
+		return strtr($this->plugin->getFormat(), $pairs);
 	}
 }

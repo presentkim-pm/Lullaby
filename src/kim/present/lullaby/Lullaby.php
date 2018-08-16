@@ -50,6 +50,9 @@ class Lullaby extends PluginBase{
 	/** @var int */
 	private $healAmount, $healDelay;
 
+	/** @var string */
+	private $format = null;
+
 	/**
 	 * Called when the plugin is loaded, before calling onEnable()
 	 */
@@ -68,6 +71,11 @@ class Lullaby extends PluginBase{
 		$config = $this->getConfig();
 		$this->healAmount = (int) $config->get(Lullaby::HEAL_TAG);
 		$this->healDelay = (int) $config->get(Lullaby::DELAY_TAG);
+
+		//Load text format
+		$this->saveResource("replacement.md", true);
+		$this->saveResource("format.txt");
+		$this->format = (string) file_get_contents("{$this->getDataFolder()}format.txt");
 
 		//Check latest version
 		if($config->getNested("settings.update-check", false)){
@@ -127,5 +135,19 @@ class Lullaby extends PluginBase{
 	 */
 	public function setHealDelay(int $healDelay) : void{
 		$this->healDelay = $healDelay;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getFormat() : string{
+		return $this->format;
+	}
+
+	/**
+	 * @param string $format
+	 */
+	public function setFormat(string $format) : void{
+		$this->format = $format;
 	}
 }
