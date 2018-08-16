@@ -70,7 +70,7 @@ class Lullaby extends PluginBase{
 		//Load config file
 		$config = $this->getConfig();
 		$this->healAmount = (int) $config->get(Lullaby::HEAL_TAG);
-		$this->healDelay = (int) $config->get(Lullaby::DELAY_TAG);
+		$this->healDelay = (int) $config->get(Lullaby::DELAY_TAG) * 20;
 
 		//Load text format
 		$this->saveResource("replacement.md", true);
