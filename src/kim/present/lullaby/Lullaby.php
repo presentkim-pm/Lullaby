@@ -75,7 +75,7 @@ class Lullaby extends PluginBase{
 		//Load text format
 		$this->saveResource("replacement.md", true);
 		$this->saveResource("format.txt");
-		$this->format = (string) file_get_contents("{$this->getDataFolder()}format.txt");
+		$this->format = str_replace(["\r\n", "\r"], "\n", (string) file_get_contents("{$this->getDataFolder()}format.txt"));
 
 		//Check latest version
 		if($config->getNested("settings.update-check", false)){
