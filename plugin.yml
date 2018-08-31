@@ -4,6 +4,5 @@ main: kim\present\lullaby\Lullaby
 version: 2.2.1
 api: [3.0.0, 4.0.0]
 author: PresentKim
-website: https://github.com/PresentKim/Lullaby-PMMP
 description: Healing when a player is lying in bed!
 ...
