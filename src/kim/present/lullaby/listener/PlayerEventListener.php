@@ -34,15 +34,15 @@ use pocketmine\event\player\PlayerBedEnterEvent;
 
 class PlayerEventListener implements Listener{
 	/** @var Lullaby */
-	private $owner = null;
+	private $plugin;
 
 	/**
 	 * PlayerEventListener constructor.
 	 *
-	 * @param Lullaby $owner
+	 * @param Lullaby $plugin
 	 */
-	public function __construct(Lullaby $owner){
-		$this->owner = $owner;
+	public function __construct(Lullaby $plugin){
+		$this->plugin = $plugin;
 	}
 
 	/**
@@ -52,6 +52,6 @@ class PlayerEventListener implements Listener{
 		$player = $event->getPlayer();
 		$bed = $event->getBed();
 		$position = $bed->asVector3()->getSide(Bed::getOtherHalfSide($bed->getDamage(), true))->add(0.5, 0.5, 0.5);
-		$this->owner->getScheduler()->scheduleRepeatingTask(new HealBedTask($player, $this->owner, $position), 2);
+		$this->plugin->getScheduler()->scheduleRepeatingTask(new HealBedTask($player, $this->plugin, $position), 2);
 	}
 }
