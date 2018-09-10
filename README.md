@@ -1,4 +1,4 @@
-# <img src="./assets/icon/index.svg" height="50" width="50"> Lullaby  
+# <img src="https://rawgit.com/PresentKim/SVG-files/master/plugin-icons/lullaby.svg" height="50" width="50"> Lullaby  
 __A plugin for [PMMP](https://pmmp.io) :: Healing when a player is lying in bed!__  
 
 [![license](https://img.shields.io/github/license/Blugin/Lullaby-PMMP.svg?label=License)](./LICENSE)
